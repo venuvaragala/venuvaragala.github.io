@@ -6,7 +6,7 @@
 
 <title>Sowmya & Venu Engagement</title>
 
-<!-- WhatsApp / OG PREVIEW (FIXED) -->
+<!-- WhatsApp / OG PREVIEW -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://venuvaragala.github.io/invitation/">
 <meta property="og:title" content="Sowmya & Venu Engagement">
@@ -67,6 +67,7 @@ h1{
 .subtitle{
   margin-top:10px;
   opacity:.9;
+  font-size:1rem;
 }
 
 /* CARD */
@@ -145,8 +146,7 @@ h1{
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- MUSIC BUTTON -->
-<div class="music" onclick="startMusic()">🔊 Tap to Play</div>
+<div class="music" onclick="startMusic()">🔊 Tap to Play Music</div>
 
 <div class="container">
 
@@ -186,7 +186,7 @@ h1{
 
 let started = false;
 
-// MUSIC START (REALISTIC FIX)
+/* 🎧 BEST POSSIBLE MUSIC SYSTEM */
 function startMusic(){
   if(started) return;
   started = true;
@@ -194,28 +194,39 @@ function startMusic(){
   const music = document.getElementById("bgm");
   music.volume = 0;
 
-  const playPromise = music.play();
+  const playAttempt = () => {
+    const p = music.play();
 
-  if(playPromise !== undefined){
-    playPromise.then(()=>{
+    if(p !== undefined){
+      p.then(() => {
 
-      let v = 0;
-      const fade = setInterval(()=>{
-        v += 0.05;
-        music.volume = Math.min(v,1);
-        if(v >= 1) clearInterval(fade);
-      },200);
+        // smooth fade-in
+        let v = 0;
+        const fade = setInterval(() => {
+          v += 0.05;
+          music.volume = Math.min(v, 1);
+          if(v >= 1) clearInterval(fade);
+        }, 200);
 
-    }).catch(()=> {
-      console.log("Autoplay blocked");
-    });
-  }
+      }).catch(() => {
+        console.log("Autoplay blocked — waiting for user interaction");
+      });
+    }
+  };
+
+  playAttempt();
 }
 
-// AUTO TRIGGER ON FIRST USER INTERACTION
-document.addEventListener("click", startMusic, { once:true });
+/* 🚀 AUTO ATTEMPT ON LOAD */
+window.addEventListener("load", () => {
+  startMusic();
+});
 
-// COUNTDOWN
+/* 🔁 GUARANTEE START ON ANY USER ACTION */
+document.addEventListener("click", startMusic, { once:true });
+document.addEventListener("touchstart", startMusic, { once:true });
+
+/* ⏳ COUNTDOWN (optional visual update) */
 const eventDate = new Date("April 15, 2026 11:00:00").getTime();
 
 setInterval(()=>{
@@ -232,7 +243,7 @@ setInterval(()=>{
 
 },1000);
 
-// SPARKLES
+/* ✨ SPARKLES */
 for(let i=0;i<35;i++){
   const s=document.createElement("div");
   s.className="sparkle";
