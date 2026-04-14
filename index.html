@@ -3,14 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Sowmya & Venu Engagement</title>
 
-<!-- WhatsApp Preview -->
+<!-- WhatsApp / OG PREVIEW (FIXED) -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://venuvaragala.github.io/invitation/">
 <meta property="og:title" content="Sowmya & Venu Engagement">
 <meta property="og:description" content="April 15, 2026 • 11:00 AM • Thotapally">
-<meta property="og:image" content="https://venuvaragala.github.io/invitation/preview.jpg">
+<meta property="og:image" content="https://venuvaragala.github.io/preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
@@ -24,7 +27,7 @@ body{
   overflow-x:hidden;
 }
 
-/* VIDEO BACKGROUND */
+/* VIDEO */
 video{
   position:fixed;
   width:100%;
@@ -61,20 +64,12 @@ h1{
   color:transparent;
 }
 
-/* TEXT */
 .subtitle{
   margin-top:10px;
-  opacity:.85;
-  font-size:1rem;
+  opacity:.9;
 }
 
-.countdown{
-  margin-top:15px;
-  font-size:1.2rem;
-  font-weight:500;
-}
-
-/* CARDS */
+/* CARD */
 .card{
   margin-top:20px;
   background:rgba(255,255,255,0.1);
@@ -97,16 +92,12 @@ h1{
 }
 
 /* PHOTO */
-.couple-photo{
-  margin-top:25px;
-}
-
 .couple-photo img{
   width:350px;
   max-width:95%;
+  margin-top:20px;
   border-radius:20px;
   box-shadow:0 10px 30px rgba(0,0,0,0.6);
-  border:2px solid rgba(255,255,255,0.3);
 }
 
 /* MUSIC BUTTON */
@@ -120,6 +111,7 @@ h1{
   border-radius:20px;
   cursor:pointer;
   font-weight:600;
+  z-index:10;
 }
 
 /* SPARKLES */
@@ -142,7 +134,7 @@ h1{
 
 <body>
 
-<!-- VIDEO -->
+<!-- BACKGROUND VIDEO -->
 <video autoplay muted loop playsinline>
   <source src="your-video.mp4" type="video/mp4">
 </video>
@@ -153,7 +145,8 @@ h1{
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<div class="music" onclick="startMusicOnce()">🔊 Music</div>
+<!-- MUSIC BUTTON -->
+<div class="music" onclick="startMusic()">🔊 Tap to Play</div>
 
 <div class="container">
 
@@ -163,19 +156,14 @@ h1{
 💍 With joyful hearts, we invite you to our engagement 💍
 </div>
 
-<!-- INVITATION MESSAGE -->
+<!-- INVITATION -->
 <div class="card">
-  <p style="line-height:1.7; font-size:1rem;">
-    With blessings of our families and grace of the divine,  
-    we are stepping into a beautiful new chapter of life.
-    <br><br>
-    We warmly invite you to join our engagement ceremony  
-    and bless us with your presence, love, and wishes.
+  <p style="line-height:1.6;">
+    With blessings of our families and divine grace,  
+    we invite you to celebrate our engagement ceremony.  
+    Your presence will make our moment complete.
   </p>
 </div>
-
-<!-- COUNTDOWN -->
-<div class="countdown" id="countdown"></div>
 
 <!-- DETAILS -->
 <div class="card">
@@ -187,44 +175,45 @@ h1{
   </a>
 </div>
 
-<!-- SPECIAL MESSAGE -->
-<div class="card">
-  <p style="font-size:1.1rem; font-weight:600;">
-    ✨ Your presence will complete our celebration ✨
-  </p>
-</div>
-
 <!-- PHOTO -->
 <div class="couple-photo">
-  <img src="photo1.jpg" alt="Couple Photo">
+  <img src="photo1.jpg" alt="Couple">
 </div>
 
 </div>
 
 <script>
-// MUSIC (smart play)
+
 let started = false;
 
-function startMusicOnce(){
+// MUSIC START (REALISTIC FIX)
+function startMusic(){
   if(started) return;
   started = true;
 
-  const music = document.getElementById('bgm');
+  const music = document.getElementById("bgm");
   music.volume = 0;
 
-  music.play().catch(()=>{});
+  const playPromise = music.play();
 
-  let vol = 0;
-  const fade = setInterval(()=>{
-    vol += 0.05;
-    music.volume = Math.min(vol,1);
-    if(vol >= 1) clearInterval(fade);
-  },200);
+  if(playPromise !== undefined){
+    playPromise.then(()=>{
+
+      let v = 0;
+      const fade = setInterval(()=>{
+        v += 0.05;
+        music.volume = Math.min(v,1);
+        if(v >= 1) clearInterval(fade);
+      },200);
+
+    }).catch(()=> {
+      console.log("Autoplay blocked");
+    });
+  }
 }
 
-document.addEventListener('click', startMusicOnce);
-document.addEventListener('scroll', startMusicOnce);
-document.addEventListener('touchstart', startMusicOnce);
+// AUTO TRIGGER ON FIRST USER INTERACTION
+document.addEventListener("click", startMusic, { once:true });
 
 // COUNTDOWN
 const eventDate = new Date("April 15, 2026 11:00:00").getTime();
@@ -238,19 +227,20 @@ setInterval(()=>{
   const m = Math.floor((gap%(1000*60*60))/(1000*60));
   const s = Math.floor((gap%(1000*60))/1000);
 
-  document.getElementById("countdown").innerText =
-    `${d}d ${h}h ${m}m ${s}s left`;
+  document.querySelector(".subtitle").innerText =
+    `💍 ${d}d ${h}h ${m}m ${s}s left for the big moment 💍`;
+
 },1000);
 
-// SPARKLES (FIXED)
-for(let i=0;i<30;i++){
-  const s = document.createElement('div');
-  s.className = 'sparkle';
-  s.style.left = Math.random()*100 + 'vw';
-  s.style.animationDuration = (Math.random()*3 + 2) + 's';
-  s.style.opacity = Math.random();
+// SPARKLES
+for(let i=0;i<35;i++){
+  const s=document.createElement("div");
+  s.className="sparkle";
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDuration=(Math.random()*3+2)+"s";
   document.body.appendChild(s);
 }
+
 </script>
 
 </body>
