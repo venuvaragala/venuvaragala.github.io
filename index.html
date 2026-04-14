@@ -185,40 +185,39 @@ h1{
 <script>
 
 /* 🎧 AUDIO AUTO SYSTEM (BEST POSSIBLE) */
-let audioUnlocked = false;
+let audioStarted = false;
 const music = document.getElementById("bgm");
 
-function unlockAudio(){
-  if(audioUnlocked) return;
-  audioUnlocked = true;
+function startAudio() {
+  if (audioStarted) return;
+  audioStarted = true;
 
   music.volume = 0;
 
-  const play = music.play();
+  const playAudio = () => {
+    const p = music.play();
 
-  if(play !== undefined){
-    play.then(()=>{
-      let v = 0;
-      const fade = setInterval(()=>{
-        v += 0.05;
-        music.volume = Math.min(v,1);
-        if(v >= 1) clearInterval(fade);
-      },150);
-    }).catch(()=>{
-      console.log("Autoplay blocked by browser");
-    });
-  }
+    if (p !== undefined) {
+      p.then(() => {
+        let v = 0;
+        const fade = setInterval(() => {
+          v += 0.05;
+          music.volume = Math.min(v, 1);
+          if (v >= 1) clearInterval(fade);
+        }, 150);
+      }).catch(() => {
+        console.log("Autoplay blocked by browser policy");
+      });
+    }
+  };
+
+  playAudio();
 }
 
-/* 🚀 TRY AUTO PLAY ON LOAD */
-window.addEventListener("load", ()=>{
-  setTimeout(()=> unlockAudio(), 500);
-});
-
-/* 🔁 GUARANTEE ON FIRST INTERACTION */
-document.addEventListener("click", unlockAudio, { once:true });
-document.addEventListener("touchstart", unlockAudio, { once:true });
-
+/* BEST POSSIBLE TRIGGER SYSTEM */
+document.addEventListener("click", startAudio, { once: true });
+document.addEventListener("touchstart", startAudio, { once: true });
+  
 /* ⏳ COUNTDOWN */
 const eventDate = new Date("April 15, 2026 11:00:00").getTime();
 
