@@ -1,176 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sowmya & Venu Engagement</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sowmya & Venu Engagement</title>
 
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 
-    body{
-      font-family:'Poppins',sans-serif;
-      background:#000;
-      color:#fff;
-      overflow-x:hidden;
-    }
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
 
-    /* HERO VIDEO BACKGROUND */
-    header{
-      position:relative;
-      height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      overflow:hidden;
-    }
+body{
+  font-family:'Poppins',sans-serif;
+  background:#000;
+  color:#fff;
+}
 
-    header video{
-      position:absolute;
-      top:0;left:0;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      z-index:-2;
-    }
+/* VIDEO BACKGROUND */
+.video-bg{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  z-index:-2;
+}
 
-    header::after{
-      content:"";
-      position:absolute;
-      width:100%;height:100%;
-      background:rgba(0,0,0,0.6);
-      z-index:-1;
-    }
+.overlay{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.55);
+  z-index:-1;
+}
 
-    .hero-content{
-      z-index:2;
-    }
+/* GLASS UI */
+.glass{
+  backdrop-filter:blur(12px);
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:20px;
+  padding:20px;
+  margin:20px;
+}
 
-    h1{
-      font-family:'Playfair Display',serif;
-      font-size:2.8rem;
-      letter-spacing:2px;
-    }
+header{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
 
-    /* NAME REVEAL */
-    .names span{
-      display:block;
-      opacity:0;
-      transform:translateY(40px);
-      animation:reveal 1.5s forwards;
-    }
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:2.5rem;
+}
 
-    .names span:nth-child(1){animation-delay:0.5s}
-    .names span:nth-child(2){animation-delay:2s}
+/* NAME REVEAL */
+.names span{
+  display:block;
+  opacity:0;
+  transform:translateY(40px);
+  animation:reveal 1.5s forwards;
+}
+.names span:nth-child(1){animation-delay:0.5s}
+.names span:nth-child(2){animation-delay:2s}
 
-    @keyframes reveal{
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
-    }
+@keyframes reveal{
+  to{opacity:1;transform:translateY(0)}
+}
 
-    .typing{
-      margin-top:15px;
-      font-size:1.2rem;
-      border-right:2px solid #fff;
-      white-space:nowrap;
-      overflow:hidden;
-      width:0;
-      animation:typing 4s steps(30,end) forwards, blink .7s infinite;
-    }
+/* TYPING */
+.typing{
+  margin-top:10px;
+  border-right:2px solid white;
+  white-space:nowrap;
+  overflow:hidden;
+  width:0;
+  animation:typing 4s steps(30,end) forwards, blink .7s infinite;
+}
+@keyframes typing{from{width:0}to{width:100%}}
+@keyframes blink{50%{border-color:transparent}}
 
-    @keyframes typing{
-      from{width:0}
-      to{width:100%}
-    }
+/* MUSIC BUTTON */
+.music-btn{
+  position:fixed;
+  bottom:20px;right:20px;
+  background:white;
+  color:black;
+  padding:10px 15px;
+  border-radius:25px;
+  cursor:pointer;
+  font-size:14px;
+}
 
-    @keyframes blink{
-      50%{border-color:transparent}
-    }
+section{text-align:center;padding:20px}
 
-    section{
-      padding:50px 15px;
-      text-align:center;
-    }
+/* GALLERY */
+.gallery{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+}
 
-    .details p{
-      margin:8px 0;
-      font-size:1rem;
-      color:#ccc;
-    }
+.gallery img{
+  width:100%;
+  height:250px;
+  object-fit:cover;
+  border-radius:12px;
+}
 
-    /* GALLERY */
-    .gallery{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:12px;
-      padding:10px;
-    }
+/* SLIDESHOW */
+.slideshow{position:relative;height:250px}
+.slide{
+  position:absolute;
+  width:100%;height:100%;
+  opacity:0;
+  transition:1s;
+}
+.slide.active{opacity:1}
 
-    .gallery img{
-      width:100%;
-      height:250px;
-      object-fit:cover;
-      border-radius:10px;
-      transition:transform .4s;
-    }
+/* MAP BUTTON */
+.map a{
+  display:inline-block;
+  margin-top:10px;
+  padding:10px 15px;
+  background:white;
+  color:black;
+  border-radius:20px;
+  text-decoration:none;
+}
 
-    .gallery img:hover{
-      transform:scale(1.05);
-    }
+@media(min-width:768px){
+  .gallery{grid-template-columns:repeat(2,1fr)}
+}
+@media(min-width:1024px){
+  .gallery{grid-template-columns:repeat(3,1fr)}
+}
 
-    /* TABLET */
-    @media(min-width:768px){
-      .gallery{
-        grid-template-columns:repeat(2,1fr);
-      }
-      h1{font-size:3.5rem}
-    }
-
-    /* DESKTOP */
-    @media(min-width:1024px){
-      .gallery{
-        grid-template-columns:repeat(3,1fr);
-      }
-    }
-
-    /* FADE SCROLL */
-    .fade{
-      opacity:0;
-      transform:translateY(40px);
-      transition:1s;
-    }
-
-    .fade.show{
-      opacity:1;
-      transform:translateY(0);
-    }
-
-    footer{
-      background:#111;
-      padding:15px;
-      font-size:0.8rem;
-    }
-
-  </style>
+</style>
 </head>
 <body>
 
+<!-- YOUR VIDEO -->
+<video class="video-bg" autoplay muted loop playsinline>
+  <source src="your-video.mp4" type="video/mp4">
+</video>
+<div class="overlay"></div>
+
 <!-- MUSIC -->
-<audio autoplay loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9b8c36.mp3?filename=romantic-piano-110997.mp3" type="audio/mpeg">
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9b8c36.mp3" type="audio/mpeg">
 </audio>
+<div class="music-btn" onclick="playMusic()">🔊 Tap Music</div>
 
 <header>
-  <!-- VIDEO BACKGROUND -->
-  <video autoplay muted loop playsinline>
-    <source src="https://cdn.coverr.co/videos/coverr-a-happy-couple-in-love-5172/1080p.mp4" type="video/mp4">
-  </video>
-
-  <div class="hero-content">
+  <div class="glass">
     <h1 class="names">
       <span>Sowmya</span>
       <span>& Venu</span>
@@ -179,38 +164,52 @@
   </div>
 </header>
 
-<section class="details fade">
-  <h2>Engagement Details</h2>
-  <p>Date: April 15, 2026</p>
-  <p>Time: 11:00 AM</p>
-  <p>Venue: Thotapally</p>
-</section>
-
-<section class="fade">
-  <h2>4K Cinematic Gallery</h2>
-  <div class="gallery">
-    <img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=3840&q=100">
-    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=3840&q=100">
-    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=3840&q=100">
-    <img src="https://images.unsplash.com/photo-1529634890462-4c2c1f7a1a74?auto=format&fit=crop&w=3840&q=100">
-    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=3840&q=100">
-    <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=3840&q=100">
+<section>
+  <div class="glass">
+    <h2>Engagement Details</h2>
+    <p>April 15, 2026</p>
+    <p>11:00 AM</p>
+    <p>Thotapally</p>
+    <div class="map">
+      <a href="https://www.google.com/maps/search/?api=1&query=Thotapally" target="_blank">📍 Open Map</a>
+    </div>
   </div>
 </section>
 
-<footer>
-  <p>Forever begins here ❤️</p>
-</footer>
+<section>
+  <div class="glass">
+    <h2>Memory Reel</h2>
+    <div class="slideshow">
+      <img class="slide active" src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=3840&q=100">
+      <img class="slide" src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=3840&q=100">
+      <img class="slide" src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=3840&q=100">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="glass">
+    <h2>4K Gallery</h2>
+    <div class="gallery">
+      <img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=3840&q=100">
+      <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=3840&q=100">
+      <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=3840&q=100">
+    </div>
+  </div>
+</section>
 
 <script>
-  const fadeEls = document.querySelectorAll('.fade');
-  window.addEventListener('scroll', () => {
-    fadeEls.forEach(el => {
-      if(el.getBoundingClientRect().top < window.innerHeight - 50){
-        el.classList.add('show');
-      }
-    });
-  });
+function playMusic(){
+  document.getElementById('music').play();
+}
+
+let i=0;
+const slides=document.querySelectorAll('.slide');
+setInterval(()=>{
+  slides[i].classList.remove('active');
+  i=(i+1)%slides.length;
+  slides[i].classList.add('active');
+},3000);
 </script>
 
 </body>
