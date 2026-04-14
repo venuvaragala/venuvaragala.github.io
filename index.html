@@ -6,7 +6,7 @@
 
 <title>Sowmya & Venu Engagement</title>
 
-<!-- WhatsApp / OG PREVIEW -->
+<!-- WhatsApp / OG PREVIEW (FIXED) -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://venuvaragala.github.io/invitation/">
 <meta property="og:title" content="Sowmya & Venu Engagement">
@@ -67,7 +67,6 @@ h1{
 .subtitle{
   margin-top:10px;
   opacity:.9;
-  font-size:1rem;
 }
 
 /* CARD */
@@ -94,7 +93,7 @@ h1{
 
 /* PHOTO */
 .couple-photo img{
-  width:450px;
+  width:350px;
   max-width:95%;
   margin-top:20px;
   border-radius:20px;
@@ -146,7 +145,8 @@ h1{
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<div class="music" onclick="startMusic()">🔊 Tap to Play Music</div>
+<!-- MUSIC BUTTON -->
+<div class="music" onclick="startMusic()">🔊 Tap to Play</div>
 
 <div class="container">
 
@@ -186,7 +186,7 @@ h1{
 
 let started = false;
 
-/* 🎧 BEST POSSIBLE MUSIC SYSTEM */
+// MUSIC START (REALISTIC FIX)
 function startMusic(){
   if(started) return;
   started = true;
@@ -194,39 +194,28 @@ function startMusic(){
   const music = document.getElementById("bgm");
   music.volume = 0;
 
-  const playAttempt = () => {
-    const p = music.play();
+  const playPromise = music.play();
 
-    if(p !== undefined){
-      p.then(() => {
+  if(playPromise !== undefined){
+    playPromise.then(()=>{
 
-        // smooth fade-in
-        let v = 0;
-        const fade = setInterval(() => {
-          v += 0.05;
-          music.volume = Math.min(v, 1);
-          if(v >= 1) clearInterval(fade);
-        }, 200);
+      let v = 0;
+      const fade = setInterval(()=>{
+        v += 0.05;
+        music.volume = Math.min(v,1);
+        if(v >= 1) clearInterval(fade);
+      },200);
 
-      }).catch(() => {
-        console.log("Autoplay blocked — waiting for user interaction");
-      });
-    }
-  };
-
-  playAttempt();
+    }).catch(()=> {
+      console.log("Autoplay blocked");
+    });
+  }
 }
 
-/* 🚀 AUTO ATTEMPT ON LOAD */
-window.addEventListener("load", () => {
-  startMusic();
-});
-
-/* 🔁 GUARANTEE START ON ANY USER ACTION */
+// AUTO TRIGGER ON FIRST USER INTERACTION
 document.addEventListener("click", startMusic, { once:true });
-document.addEventListener("touchstart", startMusic, { once:true });
 
-/* ⏳ COUNTDOWN (optional visual update) */
+// COUNTDOWN
 const eventDate = new Date("April 15, 2026 11:00:00").getTime();
 
 setInterval(()=>{
@@ -243,7 +232,7 @@ setInterval(()=>{
 
 },1000);
 
-/* ✨ SPARKLES */
+// SPARKLES
 for(let i=0;i<35;i++){
   const s=document.createElement("div");
   s.className="sparkle";
