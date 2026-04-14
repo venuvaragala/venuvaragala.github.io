@@ -6,7 +6,7 @@
 
 <title>Sowmya & Venu Engagement</title>
 
-<!-- WhatsApp / OG PREVIEW -->
+<!-- WhatsApp / OG PREVIEW (FIXED) -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://venuvaragala.github.io/invitation/">
 <meta property="og:title" content="Sowmya & Venu Engagement">
@@ -15,8 +15,8 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 
-<link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
-  
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
@@ -25,14 +25,6 @@ body{
   background:#000;
   color:#fff;
   overflow-x:hidden;
-
-  -webkit-user-select:none;
-  user-select:none;
-}
-
-img{
-  -webkit-user-drag:none;
-  pointer-events:none;
 }
 
 /* VIDEO */
@@ -65,13 +57,16 @@ video{
 
 /* TITLE */
 h1{
-  font-family:'UnifrakturCook', cursive;
+  font-family:'Great Vibes',cursive;
   font-size:3.5rem;
-  letter-spacing:2px;
-
   background:linear-gradient(45deg,#ff7eb3,#65d6ff);
   -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+  color:transparent;
+}
+
+.subtitle{
+  margin-top:10px;
+  opacity:.9;
 }
 
 /* CARD */
@@ -84,7 +79,7 @@ h1{
   max-width:600px;
 }
 
-/* BUTTONS */
+/* BUTTON */
 .map-btn{
   margin-top:10px;
   display:inline-block;
@@ -92,18 +87,6 @@ h1{
   border-radius:30px;
   background:linear-gradient(45deg,#ff7eb3,#65d6ff,#ffd86f);
   color:#000;
-  text-decoration:none;
-  font-weight:600;
-}
-
-/* CALL BUTTON */
-.call-btn{
-  margin-top:10px;
-  display:inline-block;
-  padding:10px 15px;
-  border-radius:30px;
-  background:linear-gradient(45deg,#00c6ff,#0072ff);
-  color:#fff;
   text-decoration:none;
   font-weight:600;
 }
@@ -116,49 +99,83 @@ h1{
   border-radius:20px;
   box-shadow:0 10px 30px rgba(0,0,0,0.6);
 }
+
+/* MUSIC BUTTON */
+.music{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#fff;
+  color:#000;
+  padding:10px 15px;
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:600;
+  z-index:10;
+}
+
+/* SPARKLES */
+.sparkle{
+  position:fixed;
+  width:5px;
+  height:5px;
+  background:white;
+  border-radius:50%;
+  animation:fall linear infinite;
+  opacity:0.7;
+}
+
+@keyframes fall{
+  from{transform:translateY(-10vh)}
+  to{transform:translateY(110vh)}
+}
 </style>
 </head>
 
-<body oncontextmenu="return false">
+<body>
 
 <!-- BACKGROUND VIDEO -->
 <video autoplay muted loop playsinline>
   <source src="your-video.mp4" type="video/mp4">
 </video>
-
 <div class="overlay"></div>
 
-<!-- AUDIO -->
+<!-- MUSIC -->
 <audio id="bgm" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
+
+<!-- MUSIC BUTTON -->
+<div class="music" onclick="startMusic()">🔊 Tap to Play</div>
 
 <div class="container">
 
 <h1>Sowmya & Venu</h1>
 
+<div class="subtitle">
+💍 With joyful hearts, we invite you to our engagement 💍
+</div>
+
+<!-- INVITATION -->
 <div class="card">
-  <p>
+  <p style="line-height:1.6;">
     With blessings of our families and divine grace,  
-    we invite you to celebrate our engagement ceremony.
+    we invite you to celebrate our engagement ceremony.  
+    Your presence will make our moment complete.
   </p>
 </div>
 
+<!-- DETAILS -->
 <div class="card">
   <p><strong>📍 Venue:</strong> Thotapally</p>
   <p><strong>🗓 Date:</strong> April 15, 2026 • 11:00 AM</p>
 
-  <!-- OPEN LOCATION -->
   <a class="map-btn" href="https://maps.app.goo.gl/2smbzygt1yn5xWY19" target="_blank">
     📍 Open Location
   </a>
-
-  <!-- CALL BUTTON (NUMBER HIDDEN) -->
-  <a class="call-btn" href="tel:+919876543210">
-    📞 Call Now
-  </a>
 </div>
 
+<!-- PHOTO -->
 <div class="couple-photo">
   <img src="photo1.jpg" alt="Couple">
 </div>
@@ -167,32 +184,62 @@ h1{
 
 <script>
 
-/* AUDIO AUTO PLAY (BEST POSSIBLE) */
-let audioStarted = false;
-const music = document.getElementById("bgm");
+let started = false;
 
-function startAudio(){
-  if(audioStarted) return;
-  audioStarted = true;
+// MUSIC START (REALISTIC FIX)
+function startMusic(){
+  if(started) return;
+  started = true;
 
+  const music = document.getElementById("bgm");
   music.volume = 0;
 
-  const play = music.play();
+  const playPromise = music.play();
 
-  if(play !== undefined){
-    play.then(()=>{
+  if(playPromise !== undefined){
+    playPromise.then(()=>{
+
       let v = 0;
       const fade = setInterval(()=>{
         v += 0.05;
         music.volume = Math.min(v,1);
         if(v >= 1) clearInterval(fade);
-      },150);
-    }).catch(()=>{});
+      },200);
+
+    }).catch(()=> {
+      console.log("Autoplay blocked");
+    });
   }
 }
 
-document.addEventListener("click", startAudio, { once:true });
-document.addEventListener("touchstart", startAudio, { once:true });
+// AUTO TRIGGER ON FIRST USER INTERACTION
+document.addEventListener("click", startMusic, { once:true });
+
+// COUNTDOWN
+const eventDate = new Date("April 15, 2026 11:00:00").getTime();
+
+setInterval(()=>{
+  const now = new Date().getTime();
+  const gap = eventDate - now;
+
+  const d = Math.floor(gap/(1000*60*60*24));
+  const h = Math.floor((gap%(1000*60*60*24))/(1000*60*60));
+  const m = Math.floor((gap%(1000*60*60))/(1000*60));
+  const s = Math.floor((gap%(1000*60))/1000);
+
+  document.querySelector(".subtitle").innerText =
+    `💍 ${d}d ${h}h ${m}m ${s}s left for the big moment 💍`;
+
+},1000);
+
+// SPARKLES
+for(let i=0;i<35;i++){
+  const s=document.createElement("div");
+  s.className="sparkle";
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDuration=(Math.random()*3+2)+"s";
+  document.body.appendChild(s);
+}
 
 </script>
 
