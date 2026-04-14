@@ -5,21 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sowmya & Venu Engagement</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-
 body{
-  font-family:'Poppins',sans-serif;
-  background:#000;
+  font-family:'Montserrat',sans-serif;
+  background:#0f0f1a;
   color:#fff;
 }
 
 /* VIDEO BACKGROUND */
-.video-bg{
+video{
   position:fixed;
-  top:0;left:0;
   width:100%;height:100%;
   object-fit:cover;
   z-index:-2;
@@ -27,77 +25,80 @@ body{
 
 .overlay{
   position:fixed;
-  top:0;left:0;
   width:100%;height:100%;
-  background:rgba(0,0,0,0.55);
+  background:linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,50,0.7));
   z-index:-1;
 }
 
-/* GLASS UI */
-.glass{
-  backdrop-filter:blur(12px);
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.2);
-  border-radius:20px;
-  padding:20px;
-  margin:20px;
-}
-
-header{
-  height:100vh;
+/* CENTER CONTENT */
+.container{
+  min-height:100vh;
   display:flex;
-  align-items:center;
+  flex-direction:column;
   justify-content:center;
+  align-items:center;
   text-align:center;
+  padding:20px;
 }
 
 h1{
-  font-family:'Playfair Display',serif;
-  font-size:2.5rem;
+  font-size:3rem;
+  font-weight:700;
+  background:linear-gradient(45deg,#ff7eb3,#65d6ff);
+  -webkit-background-clip:text;
+  color:transparent;
+  animation:fadeIn 2s ease;
 }
 
-/* NAME REVEAL */
-.names span{
-  display:block;
-  opacity:0;
-  transform:translateY(40px);
-  animation:reveal 1.5s forwards;
+.subtitle{
+  margin-top:10px;
+  font-size:1.2rem;
+  opacity:0.8;
+  animation:fadeIn 3s ease;
 }
-.names span:nth-child(1){animation-delay:0.5s}
-.names span:nth-child(2){animation-delay:2s}
 
-@keyframes reveal{
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(30px)}
   to{opacity:1;transform:translateY(0)}
 }
 
-/* TYPING */
-.typing{
-  margin-top:10px;
-  border-right:2px solid white;
-  white-space:nowrap;
-  overflow:hidden;
-  width:0;
-  animation:typing 4s steps(30,end) forwards, blink .7s infinite;
-}
-@keyframes typing{from{width:0}to{width:100%}}
-@keyframes blink{50%{border-color:transparent}}
-
-/* MUSIC BUTTON */
-.music-btn{
-  position:fixed;
-  bottom:20px;right:20px;
-  background:white;
-  color:black;
-  padding:10px 15px;
-  border-radius:25px;
-  cursor:pointer;
-  font-size:14px;
+/* GLASS CARD */
+.card{
+  margin-top:30px;
+  backdrop-filter:blur(15px);
+  background:rgba(255,255,255,0.08);
+  border-radius:20px;
+  padding:25px;
+  width:90%;
+  max-width:400px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.4);
 }
 
-section{text-align:center;padding:20px}
+.card p{
+  margin:8px 0;
+  font-size:1rem;
+}
+
+/* COLORFUL GLASS BUTTON */
+.map-btn{
+  margin-top:15px;
+  padding:12px 18px;
+  border-radius:30px;
+  background:linear-gradient(45deg,#ff7eb3,#65d6ff,#ffd86f);
+  color:#000;
+  font-weight:600;
+  text-decoration:none;
+  display:inline-block;
+  transition:0.3s;
+}
+
+.map-btn:hover{
+  transform:scale(1.08);
+}
 
 /* GALLERY */
 .gallery{
+  margin-top:30px;
   display:grid;
   grid-template-columns:1fr;
   gap:10px;
@@ -105,111 +106,70 @@ section{text-align:center;padding:20px}
 
 .gallery img{
   width:100%;
-  height:250px;
+  height:220px;
   object-fit:cover;
-  border-radius:12px;
-}
-
-/* SLIDESHOW */
-.slideshow{position:relative;height:250px}
-.slide{
-  position:absolute;
-  width:100%;height:100%;
-  opacity:0;
-  transition:1s;
-}
-.slide.active{opacity:1}
-
-/* MAP BUTTON */
-.map a{
-  display:inline-block;
-  margin-top:10px;
-  padding:10px 15px;
-  background:white;
-  color:black;
-  border-radius:20px;
-  text-decoration:none;
+  border-radius:15px;
 }
 
 @media(min-width:768px){
   .gallery{grid-template-columns:repeat(2,1fr)}
 }
+
 @media(min-width:1024px){
   .gallery{grid-template-columns:repeat(3,1fr)}
+}
+
+/* MUSIC BUTTON */
+.music{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  padding:10px 15px;
+  border-radius:30px;
+  background:linear-gradient(45deg,#ff7eb3,#65d6ff);
+  color:#000;
+  cursor:pointer;
 }
 
 </style>
 </head>
 <body>
 
-<!-- YOUR VIDEO -->
-<video class="video-bg" autoplay muted loop playsinline>
+<video autoplay muted loop playsinline>
   <source src="your-video.mp4" type="video/mp4">
 </video>
 <div class="overlay"></div>
 
-<!-- MUSIC -->
-<audio id="music" loop>
+<audio id="bgm" loop>
   <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9b8c36.mp3" type="audio/mpeg">
 </audio>
-<div class="music-btn" onclick="playMusic()">🔊 Tap Music</div>
 
-<header>
-  <div class="glass">
-    <h1 class="names">
-      <span>Sowmya</span>
-      <span>& Venu</span>
-    </h1>
-    <div class="typing">April 15, 2026 • 11:00 AM • Thotapally</div>
-  </div>
-</header>
+<div class="music" onclick="playMusic()">🔊 Music</div>
 
-<section>
-  <div class="glass">
-    <h2>Engagement Details</h2>
-    <p>April 15, 2026</p>
-    <p>11:00 AM</p>
-    <p>Thotapally</p>
-    <div class="map">
-      <a href="https://www.google.com/maps/search/?api=1&query=Thotapally" target="_blank">📍 Open Map</a>
-    </div>
-  </div>
-</section>
+<div class="container">
 
-<section>
-  <div class="glass">
-    <h2>Memory Reel</h2>
-    <div class="slideshow">
-      <img class="slide active" src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=3840&q=100">
-      <img class="slide" src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=3840&q=100">
-      <img class="slide" src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=3840&q=100">
-    </div>
-  </div>
-</section>
+  <h1>Sowmya & Venu</h1>
+  <div class="subtitle">April 15, 2026 • 11:00 AM</div>
 
-<section>
-  <div class="glass">
-    <h2>4K Gallery</h2>
-    <div class="gallery">
-      <img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=3840&q=100">
-      <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=3840&q=100">
-      <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=3840&q=100">
-    </div>
+  <div class="card">
+    <p><strong>Venue:</strong> Thotapally</p>
+    <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Thotapally" target="_blank">
+      📍 Open Location
+    </a>
   </div>
-</section>
+
+  <div class="gallery">
+    <img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=3840&q=100">
+    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=3840&q=100">
+    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=3840&q=100">
+  </div>
+
+</div>
 
 <script>
 function playMusic(){
-  document.getElementById('music').play();
+  document.getElementById('bgm').play();
 }
-
-let i=0;
-const slides=document.querySelectorAll('.slide');
-setInterval(()=>{
-  slides[i].classList.remove('active');
-  i=(i+1)%slides.length;
-  slides[i].classList.add('active');
-},3000);
 </script>
 
 </body>
