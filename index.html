@@ -6,7 +6,7 @@
 
 <title>Sowmya & Venu Engagement</title>
 
-<!-- WhatsApp / OG PREVIEW (FIXED) -->
+<!-- WhatsApp / OG PREVIEW -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://venuvaragala.github.io/invitation/">
 <meta property="og:title" content="Sowmya & Venu Engagement">
@@ -25,6 +25,17 @@ body{
   background:#000;
   color:#fff;
   overflow-x:hidden;
+
+  /* 🚫 Disable text selection */
+  -webkit-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+
+/* 🚫 Disable image drag */
+img{
+  -webkit-user-drag:none;
+  pointer-events:none;
 }
 
 /* VIDEO */
@@ -100,20 +111,6 @@ h1{
   box-shadow:0 10px 30px rgba(0,0,0,0.6);
 }
 
-/* MUSIC BUTTON */
-.music{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#fff;
-  color:#000;
-  padding:10px 15px;
-  border-radius:20px;
-  cursor:pointer;
-  font-weight:600;
-  z-index:10;
-}
-
 /* SPARKLES */
 .sparkle{
   position:fixed;
@@ -132,27 +129,25 @@ h1{
 </style>
 </head>
 
-<body>
+<body oncontextmenu="return false">
 
 <!-- BACKGROUND VIDEO -->
 <video autoplay muted loop playsinline>
   <source src="your-video.mp4" type="video/mp4">
 </video>
+
 <div class="overlay"></div>
 
-<!-- MUSIC -->
+<!-- AUDIO -->
 <audio id="bgm" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
-
-<!-- MUSIC BUTTON -->
-<div class="music" onclick="startMusic()">🔊 Tap to Play</div>
 
 <div class="container">
 
 <h1>Sowmya & Venu</h1>
 
-<div class="subtitle">
+<div class="subtitle" id="countdownText">
 💍 With joyful hearts, we invite you to our engagement 💍
 </div>
 
@@ -184,45 +179,42 @@ h1{
 
 <script>
 
-<script>
-
+/* 🎧 AUDIO AUTO SYSTEM (BEST POSSIBLE) */
 let audioUnlocked = false;
 const music = document.getElementById("bgm");
 
-function unlockAudio() {
-  if (audioUnlocked) return;
+function unlockAudio(){
+  if(audioUnlocked) return;
   audioUnlocked = true;
 
   music.volume = 0;
 
   const play = music.play();
 
-  if (play !== undefined) {
-    play.then(() => {
-      let vol = 0;
-      const fade = setInterval(() => {
-        vol += 0.05;
-        music.volume = Math.min(vol, 1);
-        if (vol >= 1) clearInterval(fade);
-      }, 150);
-    }).catch(() => {
-      console.log("Blocked autoplay");
+  if(play !== undefined){
+    play.then(()=>{
+      let v = 0;
+      const fade = setInterval(()=>{
+        v += 0.05;
+        music.volume = Math.min(v,1);
+        if(v >= 1) clearInterval(fade);
+      },150);
+    }).catch(()=>{
+      console.log("Autoplay blocked by browser");
     });
   }
 }
 
-/* 🔥 ADD THIS BELOW */
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    unlockAudio();
-  }, 500);
+/* 🚀 TRY AUTO PLAY ON LOAD */
+window.addEventListener("load", ()=>{
+  setTimeout(()=> unlockAudio(), 500);
 });
 
-document.addEventListener("click", unlockAudio, { once: true });
-document.addEventListener("touchstart", unlockAudio, { once: true });
+/* 🔁 GUARANTEE ON FIRST INTERACTION */
+document.addEventListener("click", unlockAudio, { once:true });
+document.addEventListener("touchstart", unlockAudio, { once:true });
 
-</script>  
-// COUNTDOWN
+/* ⏳ COUNTDOWN */
 const eventDate = new Date("April 15, 2026 11:00:00").getTime();
 
 setInterval(()=>{
@@ -234,12 +226,12 @@ setInterval(()=>{
   const m = Math.floor((gap%(1000*60*60))/(1000*60));
   const s = Math.floor((gap%(1000*60))/1000);
 
-  document.querySelector(".subtitle").innerText =
+  document.getElementById("countdownText").innerText =
     `💍 ${d}d ${h}h ${m}m ${s}s left for the big moment 💍`;
 
 },1000);
 
-// SPARKLES
+/* ✨ SPARKLES */
 for(let i=0;i<35;i++){
   const s=document.createElement("div");
   s.className="sparkle";
