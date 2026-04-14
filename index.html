@@ -9,7 +9,6 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-
 body{
   font-family:'Montserrat',sans-serif;
   background:#0f0f1a;
@@ -42,13 +41,14 @@ video{
   padding:20px;
 }
 
-/* NAME STYLE */
 h1{
   font-family:'Great Vibes',cursive;
   font-size:3.5rem;
+  font-weight:400;
   background:linear-gradient(45deg,#ff7eb3,#65d6ff);
   -webkit-background-clip:text;
   color:transparent;
+  letter-spacing:2px;
   animation:fadeIn 2s ease;
 }
 
@@ -78,12 +78,13 @@ h1{
 
 .card p{
   margin:8px 0;
+  font-size:1rem;
 }
 
-/* COLOR BUTTON */
+/* COLORFUL GLASS BUTTON */
 .map-btn{
   margin-top:15px;
-  padding:12px 20px;
+  padding:12px 18px;
   border-radius:30px;
   background:linear-gradient(45deg,#ff7eb3,#65d6ff,#ffd86f);
   color:#000;
@@ -94,7 +95,7 @@ h1{
 }
 
 .map-btn:hover{
-  transform:scale(1.1);
+  transform:scale(1.08);
 }
 
 /* GALLERY */
@@ -131,20 +132,18 @@ h1{
   color:#000;
   cursor:pointer;
 }
+
 </style>
 </head>
-
 <body>
 
-<!-- VIDEO -->
 <video autoplay muted loop playsinline>
   <source src="your-video.mp4" type="video/mp4">
 </video>
 <div class="overlay"></div>
 
-<!-- AUDIO -->
 <audio id="bgm" loop>
-  <source src="music.mp3" type="audio/mpeg">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9b8c36.mp3" type="audio/mpeg">
 </audio>
 
 <div class="music" onclick="playMusic()">🔊 Music</div>
@@ -156,17 +155,15 @@ h1{
 
   <div class="card">
     <p><strong>Venue:</strong> Thotapally</p>
-
-    <a class="map-btn" 
-       href="https://maps.app.goo.gl/EQbe4nWCQNb9HkEf8" 
-       target="_blank">
-       📍 Open Location
+    <a class="map-btn" href="https://maps.app.goo.gl/2smbzygt1yn5xWY19" target="_blank">
+      📍 Open Location
     </a>
   </div>
 
   <div class="gallery">
     <img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=3840&q=100">
-   
+    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=3840&q=100">
+    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=3840&q=100">
   </div>
 
 </div>
