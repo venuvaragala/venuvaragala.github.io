@@ -26,13 +26,10 @@ body{
   color:#fff;
   overflow-x:hidden;
 
-  /* 🚫 Disable text selection */
   -webkit-user-select:none;
-  -ms-user-select:none;
   user-select:none;
 }
 
-/* 🚫 Disable image drag */
 img{
   -webkit-user-drag:none;
   pointer-events:none;
@@ -71,16 +68,10 @@ h1{
   font-family:'UnifrakturCook', cursive;
   font-size:3.5rem;
   letter-spacing:2px;
-  color:#fff;
 
   background:linear-gradient(45deg,#ff7eb3,#65d6ff);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-}
-
-.subtitle{
-  margin-top:10px;
-  opacity:.9;
 }
 
 /* CARD */
@@ -93,7 +84,7 @@ h1{
   max-width:600px;
 }
 
-/* BUTTON */
+/* BUTTONS */
 .map-btn{
   margin-top:10px;
   display:inline-block;
@@ -105,6 +96,18 @@ h1{
   font-weight:600;
 }
 
+/* CALL BUTTON */
+.call-btn{
+  margin-top:10px;
+  display:inline-block;
+  padding:10px 15px;
+  border-radius:30px;
+  background:linear-gradient(45deg,#00c6ff,#0072ff);
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+}
+
 /* PHOTO */
 .couple-photo img{
   width:550px;
@@ -112,22 +115,6 @@ h1{
   margin-top:20px;
   border-radius:20px;
   box-shadow:0 10px 30px rgba(0,0,0,0.6);
-}
-
-/* SPARKLES */
-.sparkle{
-  position:fixed;
-  width:5px;
-  height:5px;
-  background:white;
-  border-radius:50%;
-  animation:fall linear infinite;
-  opacity:0.7;
-}
-
-@keyframes fall{
-  from{transform:translateY(-10vh)}
-  to{transform:translateY(110vh)}
 }
 </style>
 </head>
@@ -150,30 +137,28 @@ h1{
 
 <h1>Sowmya & Venu</h1>
 
-<div class="subtitle" id="countdownText">
-💍 With joyful hearts, we invite you to our engagement 💍
-</div>
-
-<!-- INVITATION -->
 <div class="card">
-  <p style="line-height:1.6;">
+  <p>
     With blessings of our families and divine grace,  
-    we invite you to celebrate our engagement ceremony.  
-    Your presence will make our moment complete.
+    we invite you to celebrate our engagement ceremony.
   </p>
 </div>
 
-<!-- DETAILS -->
 <div class="card">
   <p><strong>📍 Venue:</strong> Thotapally</p>
   <p><strong>🗓 Date:</strong> April 15, 2026 • 11:00 AM</p>
 
+  <!-- OPEN LOCATION -->
   <a class="map-btn" href="https://maps.app.goo.gl/2smbzygt1yn5xWY19" target="_blank">
     📍 Open Location
   </a>
+
+  <!-- CALL BUTTON (NUMBER HIDDEN) -->
+  <a class="call-btn" href="tel:+919876543210">
+    📞 Call Now
+  </a>
 </div>
 
-<!-- PHOTO -->
 <div class="couple-photo">
   <img src="photo1.jpg" alt="Couple">
 </div>
@@ -182,65 +167,32 @@ h1{
 
 <script>
 
-/* 🎧 AUDIO AUTO SYSTEM (BEST POSSIBLE) */
+/* AUDIO AUTO PLAY (BEST POSSIBLE) */
 let audioStarted = false;
 const music = document.getElementById("bgm");
 
-function startAudio() {
-  if (audioStarted) return;
+function startAudio(){
+  if(audioStarted) return;
   audioStarted = true;
 
   music.volume = 0;
 
-  const playAudio = () => {
-    const p = music.play();
+  const play = music.play();
 
-    if (p !== undefined) {
-      p.then(() => {
-        let v = 0;
-        const fade = setInterval(() => {
-          v += 0.05;
-          music.volume = Math.min(v, 1);
-          if (v >= 1) clearInterval(fade);
-        }, 150);
-      }).catch(() => {
-        console.log("Autoplay blocked by browser policy");
-      });
-    }
-  };
-
-  playAudio();
+  if(play !== undefined){
+    play.then(()=>{
+      let v = 0;
+      const fade = setInterval(()=>{
+        v += 0.05;
+        music.volume = Math.min(v,1);
+        if(v >= 1) clearInterval(fade);
+      },150);
+    }).catch(()=>{});
+  }
 }
 
-/* BEST POSSIBLE TRIGGER SYSTEM */
-document.addEventListener("click", startAudio, { once: true });
-document.addEventListener("touchstart", startAudio, { once: true });
-  
-/* ⏳ COUNTDOWN */
-const eventDate = new Date("April 15, 2026 11:00:00").getTime();
-
-setInterval(()=>{
-  const now = new Date().getTime();
-  const gap = eventDate - now;
-
-  const d = Math.floor(gap/(1000*60*60*24));
-  const h = Math.floor((gap%(1000*60*60*24))/(1000*60*60));
-  const m = Math.floor((gap%(1000*60*60))/(1000*60));
-  const s = Math.floor((gap%(1000*60))/1000);
-
-  document.getElementById("countdownText").innerText =
-    `💍 ${d}d ${h}h ${m}m ${s}s left for the big moment 💍`;
-
-},1000);
-
-/* ✨ SPARKLES */
-for(let i=0;i<35;i++){
-  const s=document.createElement("div");
-  s.className="sparkle";
-  s.style.left=Math.random()*100+"vw";
-  s.style.animationDuration=(Math.random()*3+2)+"s";
-  document.body.appendChild(s);
-}
+document.addEventListener("click", startAudio, { once:true });
+document.addEventListener("touchstart", startAudio, { once:true });
 
 </script>
 
