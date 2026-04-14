@@ -5,38 +5,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sowmya & Venu Engagement</title>
 
+<!-- WhatsApp Preview -->
+<meta property="og:title" content="Sowmya & Venu Engagement">
+<meta property="og:description" content="Join us on April 15, 2026 at Thotapally">
+<meta property="og:image" content="preview.jpg">
+
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+
 body{
   font-family:'Montserrat',sans-serif;
-  background:#0f0f1a;
+  background:#000;
   color:#fff;
 }
 
-/* VIDEO BACKGROUND */
+/* VIDEO */
 video{
   position:fixed;
-  width:100%;height:100%;
+  width:100%;
+  height:100%;
   object-fit:cover;
   z-index:-2;
 }
 
 .overlay{
   position:fixed;
-  width:100%;height:100%;
-  background:linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,50,0.7));
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.6);
   z-index:-1;
 }
 
-/* CENTER CONTENT */
 .container{
   min-height:100vh;
   display:flex;
   flex-direction:column;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   text-align:center;
   padding:20px;
 }
@@ -44,63 +51,60 @@ video{
 h1{
   font-family:'Great Vibes',cursive;
   font-size:3.5rem;
-  font-weight:400;
   background:linear-gradient(45deg,#ff7eb3,#65d6ff);
   -webkit-background-clip:text;
   color:transparent;
-  letter-spacing:2px;
-  animation:fadeIn 2s ease;
 }
 
 .subtitle{
   margin-top:10px;
-  font-size:1.2rem;
-  opacity:0.8;
-  animation:fadeIn 3s ease;
+  opacity:.8;
 }
 
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(30px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-/* GLASS CARD */
-.card{
-  margin-top:30px;
-  backdrop-filter:blur(15px);
-  background:rgba(255,255,255,0.08);
-  border-radius:20px;
-  padding:25px;
-  width:90%;
-  max-width:400px;
-  box-shadow:0 8px 32px rgba(0,0,0,0.4);
-}
-
-.card p{
-  margin:8px 0;
-  font-size:1rem;
-}
-
-/* COLORFUL GLASS BUTTON */
-.map-btn{
+/* COUNTDOWN */
+.countdown{
   margin-top:15px;
-  padding:12px 18px;
+  font-size:1.2rem;
+}
+
+/* CARD */
+.card{
+  margin-top:20px;
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(10px);
+  padding:20px;
+  border-radius:15px;
+}
+
+/* BUTTON */
+.map-btn{
+  margin-top:10px;
+  display:inline-block;
+  padding:10px 15px;
   border-radius:30px;
   background:linear-gradient(45deg,#ff7eb3,#65d6ff,#ffd86f);
   color:#000;
-  font-weight:600;
   text-decoration:none;
-  display:inline-block;
-  transition:0.3s;
 }
 
-.map-btn:hover{
-  transform:scale(1.08);
+/* COUPLE PHOTO */
+.couple-photo{
+  margin-top:20px;
+  display:flex;
+  justify-content:center;
+}
+
+.couple-photo img{
+  width:250px;
+  max-width:90%;
+  border-radius:20px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.5);
+  border:2px solid rgba(255,255,255,0.3);
 }
 
 /* GALLERY */
 .gallery{
-  margin-top:30px;
+  margin-top:20px;
   display:grid;
   grid-template-columns:1fr;
   gap:10px;
@@ -110,7 +114,7 @@ h1{
   width:100%;
   height:220px;
   object-fit:cover;
-  border-radius:15px;
+  border-radius:10px;
 }
 
 @media(min-width:768px){
@@ -121,56 +125,113 @@ h1{
   .gallery{grid-template-columns:repeat(3,1fr)}
 }
 
-/* MUSIC BUTTON */
+/* MUSIC */
 .music{
   position:fixed;
   bottom:20px;
   right:20px;
-  padding:10px 15px;
-  border-radius:30px;
-  background:linear-gradient(45deg,#ff7eb3,#65d6ff);
+  background:#fff;
   color:#000;
+  padding:10px;
+  border-radius:20px;
   cursor:pointer;
 }
 
+/* SPARKLES */
+.sparkle{
+  position:fixed;
+  width:5px;
+  height:5px;
+  background:white;
+  border-radius:50%;
+  animation:fall linear infinite;
+}
+
+@keyframes fall{
+  from{transform:translateY(-10vh)}
+  to{transform:translateY(110vh)}
+}
 </style>
 </head>
+
 <body>
 
+<!-- VIDEO -->
 <video autoplay muted loop playsinline>
   <source src="your-video.mp4" type="video/mp4">
 </video>
 <div class="overlay"></div>
 
+<!-- AUDIO -->
 <audio id="bgm" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9b8c36.mp3" type="audio/mpeg">
+  <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <div class="music" onclick="playMusic()">🔊 Music</div>
 
 <div class="container">
 
-  <h1>Sowmya & Venu</h1>
-  <div class="subtitle">April 15, 2026 • 11:00 AM</div>
+<h1>Sowmya & Venu</h1>
+<div class="subtitle">April 15, 2026 • 11:00 AM</div>
 
-  <div class="card">
-    <p><strong>Venue:</strong> Thotapally</p>
-    <a class="map-btn" href="https://maps.app.goo.gl/2smbzygt1yn5xWY19" target="_blank">
-      📍 Open Location
-    </a>
-  </div>
+<div class="countdown" id="countdown"></div>
 
-  <div class="gallery">
-    <div class="gallery">
+<div class="card">
+  <p><strong>Venue:</strong> Thotapally</p>
+  <a class="map-btn" href="https://maps.app.goo.gl/2smbzygt1yn5xWY19" target="_blank">
+    📍 Open Location
+  </a>
+</div>
+
+<!-- CENTERED COUPLE PHOTO -->
+<div class="couple-photo">
+  <img src="photo1.jpg" alt="Couple Photo">
+</div>
+
+<!-- GALLERY -->
+<div class="gallery">
   <img src="photo1.jpg">
-  
+  <img src="photo1.jpg">
+  <img src="photo1.jpg">
 </div>
 
 </div>
 
 <script>
 function playMusic(){
-  document.getElementById('bgm').play();
+  const music=document.getElementById('bgm');
+  music.volume=0;
+  music.play();
+  let vol=0;
+  const interval=setInterval(()=>{
+    vol+=0.05;
+    music.volume=Math.min(vol,1);
+    if(vol>=1) clearInterval(interval);
+  },200);
+}
+
+// COUNTDOWN
+const eventDate=new Date("April 15, 2026 11:00:00").getTime();
+setInterval(()=>{
+  const now=new Date().getTime();
+  const gap=eventDate-now;
+
+  const d=Math.floor(gap/(1000*60*60*24));
+  const h=Math.floor((gap%(1000*60*60*24))/(1000*60*60));
+  const m=Math.floor((gap%(1000*60*60))/(1000*60));
+  const s=Math.floor((gap%(1000*60))/1000);
+
+  document.getElementById('countdown').innerText =
+    `${d}d ${h}h ${m}m ${s}s left`;
+},1000);
+
+// SPARKLES
+for(let i=0;i<30;i++){
+  const s=document.createElement('div');
+  s.className='sparkle';
+  s.style.left=Math.random()*100+'vw';
+  s.style.animationDuration=(Math.random()*3+2)+'s';
+  document.body.appendChild(s);
 }
 </script>
 
