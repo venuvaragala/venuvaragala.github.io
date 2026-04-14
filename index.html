@@ -184,6 +184,8 @@ h1{
 
 <script>
 
+<script>
+
 let audioUnlocked = false;
 const music = document.getElementById("bgm");
 
@@ -204,15 +206,22 @@ function unlockAudio() {
         if (vol >= 1) clearInterval(fade);
       }, 150);
     }).catch(() => {
-      console.log("Autoplay blocked by browser");
+      console.log("Blocked autoplay");
     });
   }
 }
 
-/* 👇 THIS IS THE KEY */
+/* 🔥 ADD THIS BELOW */
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    unlockAudio();
+  }, 500);
+});
+
 document.addEventListener("click", unlockAudio, { once: true });
 document.addEventListener("touchstart", unlockAudio, { once: true });
-  
+
+</script>  
 // COUNTDOWN
 const eventDate = new Date("April 15, 2026 11:00:00").getTime();
 
