@@ -10,7 +10,7 @@
 <meta property="og:url" content="https://venuvaragala.github.io/invitation/">
 <meta property="og:title" content="Sowmya & Venu Engagement">
 <meta property="og:description" content="April 15, 2026 • 11:00 AM • Thotapally">
-<meta property="og:image" content="https://venuvaragala.github.io/preview.jpg">
+<meta property="og:image" content="https://venuvaragala.github.io/invitation/preview.jpg">
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
@@ -23,7 +23,7 @@ body{
   color:#fff;
 }
 
-/* VIDEO BACKGROUND */
+/* VIDEO */
 video{
   position:fixed;
   width:100%;
@@ -88,7 +88,7 @@ h1{
   text-decoration:none;
 }
 
-/* CENTER PHOTO */
+/* PHOTO */
 .couple-photo{
   margin-top:25px;
   display:flex;
@@ -145,7 +145,7 @@ h1{
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<div class="music" onclick="playMusic()">🔊 Music</div>
+<div class="music" onclick="startMusicOnce()">🔊 Music</div>
 
 <div class="container">
 
@@ -161,7 +161,7 @@ h1{
   </a>
 </div>
 
-<!-- ✅ ONLY ONE PHOTO (CENTERED) -->
+<!-- PHOTO -->
 <div class="couple-photo">
   <img src="photo1.jpg" alt="Couple Photo">
 </div>
@@ -169,17 +169,30 @@ h1{
 </div>
 
 <script>
-function playMusic(){
-  const music=document.getElementById('bgm');
-  music.volume=0;
-  music.play();
-  let vol=0;
-  const interval=setInterval(()=>{
-    vol+=0.05;
-    music.volume=Math.min(vol,1);
-    if(vol>=1) clearInterval(interval);
+// SMART AUTOPLAY
+let started = false;
+
+function startMusicOnce(){
+  if(started) return;
+  started = true;
+
+  const music = document.getElementById('bgm');
+  music.volume = 0;
+
+  music.play().catch(()=>{});
+
+  let vol = 0;
+  const interval = setInterval(()=>{
+    vol += 0.05;
+    music.volume = Math.min(vol, 1);
+    if(vol >= 1) clearInterval(interval);
   },200);
 }
+
+// trigger on user interaction
+document.addEventListener('click', startMusicOnce);
+document.addEventListener('scroll', startMusicOnce);
+document.addEventListener('touchstart', startMusicOnce);
 
 // COUNTDOWN
 const eventDate=new Date("April 15, 2026 11:00:00").getTime();
