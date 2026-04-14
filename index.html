@@ -184,37 +184,35 @@ h1{
 
 <script>
 
-let started = false;
+let audioUnlocked = false;
+const music = document.getElementById("bgm");
 
-// MUSIC START (REALISTIC FIX)
-function startMusic(){
-  if(started) return;
-  started = true;
+function unlockAudio() {
+  if (audioUnlocked) return;
+  audioUnlocked = true;
 
-  const music = document.getElementById("bgm");
   music.volume = 0;
 
-  const playPromise = music.play();
+  const play = music.play();
 
-  if(playPromise !== undefined){
-    playPromise.then(()=>{
-
-      let v = 0;
-      const fade = setInterval(()=>{
-        v += 0.05;
-        music.volume = Math.min(v,1);
-        if(v >= 1) clearInterval(fade);
-      },200);
-
-    }).catch(()=> {
-      console.log("Autoplay blocked");
+  if (play !== undefined) {
+    play.then(() => {
+      let vol = 0;
+      const fade = setInterval(() => {
+        vol += 0.05;
+        music.volume = Math.min(vol, 1);
+        if (vol >= 1) clearInterval(fade);
+      }, 150);
+    }).catch(() => {
+      console.log("Autoplay blocked by browser");
     });
   }
 }
 
-// AUTO TRIGGER ON FIRST USER INTERACTION
-document.addEventListener("click", startMusic, { once:true });
-
+/* 👇 THIS IS THE KEY */
+document.addEventListener("click", unlockAudio, { once: true });
+document.addEventListener("touchstart", unlockAudio, { once: true });
+  
 // COUNTDOWN
 const eventDate = new Date("April 15, 2026 11:00:00").getTime();
 
