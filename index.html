@@ -21,9 +21,10 @@ body{
   font-family:'Montserrat',sans-serif;
   background:#000;
   color:#fff;
+  overflow-x:hidden;
 }
 
-/* VIDEO */
+/* VIDEO BACKGROUND */
 video{
   position:fixed;
   width:100%;
@@ -40,6 +41,7 @@ video{
   z-index:-1;
 }
 
+/* CONTAINER */
 .container{
   min-height:100vh;
   display:flex;
@@ -50,6 +52,7 @@ video{
   padding:20px;
 }
 
+/* TITLE */
 h1{
   font-family:'Great Vibes',cursive;
   font-size:3.5rem;
@@ -58,23 +61,27 @@ h1{
   color:transparent;
 }
 
+/* TEXT */
 .subtitle{
   margin-top:10px;
-  opacity:.8;
+  opacity:.85;
+  font-size:1rem;
 }
 
 .countdown{
   margin-top:15px;
   font-size:1.2rem;
+  font-weight:500;
 }
 
-/* CARD */
+/* CARDS */
 .card{
   margin-top:20px;
   background:rgba(255,255,255,0.1);
   backdrop-filter:blur(10px);
   padding:20px;
   border-radius:15px;
+  max-width:600px;
 }
 
 /* BUTTON */
@@ -86,13 +93,12 @@ h1{
   background:linear-gradient(45deg,#ff7eb3,#65d6ff,#ffd86f);
   color:#000;
   text-decoration:none;
+  font-weight:600;
 }
 
 /* PHOTO */
 .couple-photo{
   margin-top:25px;
-  display:flex;
-  justify-content:center;
 }
 
 .couple-photo img{
@@ -110,9 +116,10 @@ h1{
   right:20px;
   background:#fff;
   color:#000;
-  padding:10px;
+  padding:10px 15px;
   border-radius:20px;
   cursor:pointer;
+  font-weight:600;
 }
 
 /* SPARKLES */
@@ -123,6 +130,7 @@ h1{
   background:white;
   border-radius:50%;
   animation:fall linear infinite;
+  opacity:0.7;
 }
 
 @keyframes fall{
@@ -140,7 +148,7 @@ h1{
 </video>
 <div class="overlay"></div>
 
-<!-- AUDIO -->
+<!-- MUSIC -->
 <audio id="bgm" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
@@ -150,15 +158,40 @@ h1{
 <div class="container">
 
 <h1>Sowmya & Venu</h1>
-<div class="subtitle">April 15, 2026 • 11:00 AM</div>
 
+<div class="subtitle">
+💍 With joyful hearts, we invite you to our engagement 💍
+</div>
+
+<!-- INVITATION MESSAGE -->
+<div class="card">
+  <p style="line-height:1.7; font-size:1rem;">
+    With blessings of our families and grace of the divine,  
+    we are stepping into a beautiful new chapter of life.
+    <br><br>
+    We warmly invite you to join our engagement ceremony  
+    and bless us with your presence, love, and wishes.
+  </p>
+</div>
+
+<!-- COUNTDOWN -->
 <div class="countdown" id="countdown"></div>
 
+<!-- DETAILS -->
 <div class="card">
-  <p><strong>Venue:</strong> Thotapally</p>
+  <p><strong>📍 Venue:</strong> Thotapally</p>
+  <p><strong>🗓 Date:</strong> April 15, 2026 • 11:00 AM</p>
+
   <a class="map-btn" href="https://maps.app.goo.gl/2smbzygt1yn5xWY19" target="_blank">
     📍 Open Location
   </a>
+</div>
+
+<!-- SPECIAL MESSAGE -->
+<div class="card">
+  <p style="font-size:1.1rem; font-weight:600;">
+    ✨ Your presence will complete our celebration ✨
+  </p>
 </div>
 
 <!-- PHOTO -->
@@ -169,7 +202,7 @@ h1{
 </div>
 
 <script>
-// SMART AUTOPLAY
+// MUSIC (smart play)
 let started = false;
 
 function startMusicOnce(){
@@ -182,39 +215,40 @@ function startMusicOnce(){
   music.play().catch(()=>{});
 
   let vol = 0;
-  const interval = setInterval(()=>{
+  const fade = setInterval(()=>{
     vol += 0.05;
-    music.volume = Math.min(vol, 1);
-    if(vol >= 1) clearInterval(interval);
+    music.volume = Math.min(vol,1);
+    if(vol >= 1) clearInterval(fade);
   },200);
 }
 
-// trigger on user interaction
 document.addEventListener('click', startMusicOnce);
 document.addEventListener('scroll', startMusicOnce);
 document.addEventListener('touchstart', startMusicOnce);
 
 // COUNTDOWN
-const eventDate=new Date("April 15, 2026 11:00:00").getTime();
+const eventDate = new Date("April 15, 2026 11:00:00").getTime();
+
 setInterval(()=>{
-  const now=new Date().getTime();
-  const gap=eventDate-now;
+  const now = new Date().getTime();
+  const gap = eventDate - now;
 
-  const d=Math.floor(gap/(1000*60*60*24));
-  const h=Math.floor((gap%(1000*60*60*24))/(1000*60*60));
-  const m=Math.floor((gap%(1000*60*60))/(1000*60));
-  const s=Math.floor((gap%(1000*60))/1000);
+  const d = Math.floor(gap/(1000*60*60*24));
+  const h = Math.floor((gap%(1000*60*60*24))/(1000*60*60));
+  const m = Math.floor((gap%(1000*60*60))/(1000*60));
+  const s = Math.floor((gap%(1000*60))/1000);
 
-  document.getElementById('countdown').innerText =
+  document.getElementById("countdown").innerText =
     `${d}d ${h}h ${m}m ${s}s left`;
 },1000);
 
-// SPARKLES
+// SPARKLES (FIXED)
 for(let i=0;i<30;i++){
-  const s=document.createElement('div');
-  s.className='sparkle';
-  s.style.left=Math.random()*100+'vw';
-  s.style.animationDuration=(Math.random()*3+2)+'s';
+  const s = document.createElement('div');
+  s.className = 'sparkle';
+  s.style.left = Math.random()*100 + 'vw';
+  s.style.animationDuration = (Math.random()*3 + 2) + 's';
+  s.style.opacity = Math.random();
   document.body.appendChild(s);
 }
 </script>
