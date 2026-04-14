@@ -6,25 +6,35 @@
 
 <title>Sowmya & Venu Engagement</title>
 
-<!-- WhatsApp / OG PREVIEW (FIXED) -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://venuvaragala.github.io/invitation/">
 <meta property="og:title" content="Sowmya & Venu Engagement">
 <meta property="og:description" content="April 15, 2026 • 11:00 AM • Thotapally">
 <meta property="og:image" content="https://venuvaragala.github.io/preview.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  user-select:none;
+  -webkit-user-select:none;
+  -ms-user-select:none;
+}
 
 body{
   font-family:'Montserrat',sans-serif;
   background:#000;
   color:#fff;
   overflow-x:hidden;
+}
+
+/* BLOCK IMAGE DRAG */
+img{
+  pointer-events:none;
+  -webkit-user-drag:none;
 }
 
 /* VIDEO */
@@ -44,7 +54,6 @@ video{
   z-index:-1;
 }
 
-/* CONTAINER */
 .container{
   min-height:100vh;
   display:flex;
@@ -55,7 +64,6 @@ video{
   padding:20px;
 }
 
-/* TITLE */
 h1{
   font-family:'Great Vibes',cursive;
   font-size:3.5rem;
@@ -69,7 +77,6 @@ h1{
   opacity:.9;
 }
 
-/* CARD */
 .card{
   margin-top:20px;
   background:rgba(255,255,255,0.1);
@@ -79,7 +86,6 @@ h1{
   max-width:600px;
 }
 
-/* BUTTON */
 .map-btn{
   margin-top:10px;
   display:inline-block;
@@ -91,7 +97,6 @@ h1{
   font-weight:600;
 }
 
-/* PHOTO */
 .couple-photo img{
   width:550px;
   max-width:95%;
@@ -100,7 +105,6 @@ h1{
   box-shadow:0 10px 30px rgba(0,0,0,0.6);
 }
 
-/* MUSIC BUTTON */
 .music{
   position:fixed;
   bottom:20px;
@@ -132,20 +136,17 @@ h1{
 </style>
 </head>
 
-<body>
+<body oncontextmenu="return false">
 
-<!-- BACKGROUND VIDEO -->
 <video autoplay muted loop playsinline>
   <source src="your-video.mp4" type="video/mp4">
 </video>
 <div class="overlay"></div>
 
-<!-- MUSIC -->
 <audio id="bgm" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- MUSIC BUTTON -->
 <div class="music" onclick="startMusic()">🔊 Tap to Play</div>
 
 <div class="container">
@@ -153,19 +154,16 @@ h1{
 <h1>Sowmya & Venu</h1>
 
 <div class="subtitle">
-💍 With joyful hearts, we invite you to our engagement 💍
+💍 With joyful hearts, we invite you 💍
 </div>
 
-<!-- INVITATION -->
 <div class="card">
   <p style="line-height:1.6;">
     With blessings of our families and divine grace,  
-    we invite you to celebrate our engagement ceremony.  
-    Your presence will make our moment complete.
+    we invite you to celebrate our engagement ceremony.
   </p>
 </div>
 
-<!-- DETAILS -->
 <div class="card">
   <p><strong>📍 Venue:</strong> Thotapally</p>
   <p><strong>🗓 Date:</strong> April 15, 2026 • 11:00 AM</p>
@@ -175,7 +173,6 @@ h1{
   </a>
 </div>
 
-<!-- PHOTO -->
 <div class="couple-photo">
   <img src="photo1.jpg" alt="Couple">
 </div>
@@ -184,9 +181,29 @@ h1{
 
 <script>
 
+// BLOCK COPY EVENTS (CORE SECURITY LAYER)
+document.addEventListener("contextmenu", e => e.preventDefault());
+document.addEventListener("copy", e => e.preventDefault());
+document.addEventListener("cut", e => e.preventDefault());
+document.addEventListener("paste", e => e.preventDefault());
+
+// BLOCK KEYBOARD SHORTCUTS
+document.addEventListener("keydown", function(e){
+  if(
+    e.ctrlKey && 
+    ["u","s","c","v"].includes(e.key.toLowerCase())
+  ){
+    e.preventDefault();
+  }
+
+  if(e.key === "F12"){
+    e.preventDefault();
+  }
+});
+
+// MUSIC
 let started = false;
 
-// MUSIC START (REALISTIC FIX)
 function startMusic(){
   if(started) return;
   started = true;
@@ -196,23 +213,18 @@ function startMusic(){
 
   const playPromise = music.play();
 
-  if(playPromise !== undefined){
+  if(playPromise){
     playPromise.then(()=>{
-
       let v = 0;
       const fade = setInterval(()=>{
         v += 0.05;
         music.volume = Math.min(v,1);
         if(v >= 1) clearInterval(fade);
       },200);
-
-    }).catch(()=> {
-      console.log("Autoplay blocked");
-    });
+    }).catch(()=>{});
   }
 }
 
-// AUTO TRIGGER ON FIRST USER INTERACTION
 document.addEventListener("click", startMusic, { once:true });
 
 // COUNTDOWN
