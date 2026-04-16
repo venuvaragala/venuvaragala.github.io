@@ -13,7 +13,6 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  user-select:none;
 }
 
 body{
@@ -21,12 +20,6 @@ body{
   background:#000;
   color:#fff;
   overflow-x:hidden;
-}
-
-/* BLOCK IMAGE DRAG */
-img{
-  -webkit-user-drag:none;
-  pointer-events:none;
 }
 
 /* VIDEO */
@@ -46,6 +39,7 @@ video{
   z-index:-1;
 }
 
+/* CONTAINER */
 .container{
   min-height:100vh;
   display:flex;
@@ -53,92 +47,79 @@ video{
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding:20px;
+  padding:15px;
 }
 
 /* TITLE */
 h1{
   font-family:'Great Vibes',cursive;
-  font-size:3.5rem;
+  font-size:clamp(2rem, 6vw, 3.5rem);
   background:linear-gradient(45deg,#ff7eb3,#65d6ff);
   -webkit-background-clip:text;
   color:transparent;
 }
 
 .subtitle{
-  margin-top:10px;
-  opacity:.9;
+  margin-top:8px;
+  font-size:clamp(14px,3vw,18px);
 }
 
 /* CARD */
 .card{
-  margin-top:20px;
+  margin-top:15px;
   background:rgba(255,255,255,0.1);
   backdrop-filter:blur(10px);
-  padding:20px;
-  border-radius:15px;
-  max-width:600px;
+  padding:15px;
+  border-radius:12px;
+  width:100%;
+  max-width:500px;
+  font-size:clamp(13px,3vw,16px);
 }
 
-/* PHOTO WRAPPER */
-.photo-box{
-  position:relative;
-  display:inline-block;
-}
-
-/* IMAGE STYLE */
+/* IMAGE */
 .photo-box img{
-  width:550px;
-  max-width:95%;
+  width:100%;
+  max-width:500px;
   margin-top:20px;
-  border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.6);
+  border-radius:15px;
 }
 
-/* GALLERY GRID */
+/* BUTTON */
+.view-btn{
+  margin-top:10px;
+  padding:8px 14px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(45deg,#ff7eb3,#65d6ff);
+  color:#000;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+/* GALLERY */
 .gallery{
-  margin-top:40px;
+  margin-top:30px;
+  width:100%;
 }
 
 .gallery h2{
   font-family:'Great Vibes',cursive;
-  font-size:2.5rem;
+  font-size:clamp(1.8rem,5vw,2.5rem);
   margin-bottom:15px;
 }
 
 .gallery-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-  gap:10px;
-  max-width:800px;
-}
-
-.gallery-item{
-  position:relative;
+  grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;
 }
 
 .gallery-item img{
   width:100%;
-  height:140px;
+  height:110px;
   object-fit:cover;
   border-radius:10px;
-}
-
-/* VIEW BUTTON */
-.view-btn{
-  position:absolute;
-  bottom:10px;
-  left:50%;
-  transform:translateX(-50%);
-  padding:6px 12px;
-  border:none;
-  border-radius:20px;
-  background:linear-gradient(45deg,#ff7eb3,#65d6ff);
-  color:#000;
-  font-size:12px;
-  font-weight:600;
-  cursor:pointer;
-  pointer-events:auto;
 }
 
 /* POPUP */
@@ -156,41 +137,44 @@ h1{
 }
 
 #popup img{
-  max-width:90%;
+  max-width:95%;
   max-height:90%;
-  border-radius:15px;
+  border-radius:10px;
 }
 
 /* MUSIC BUTTON */
 .music{
   position:fixed;
-  bottom:20px;
-  right:20px;
+  bottom:15px;
+  right:15px;
   background:#fff;
   color:#000;
-  padding:10px 15px;
+  padding:8px 12px;
   border-radius:20px;
+  font-size:12px;
   cursor:pointer;
 }
 
-/* SPARKLES */
-.sparkle{
-  position:fixed;
-  width:5px;
-  height:5px;
-  background:white;
-  border-radius:50%;
-  animation:fall linear infinite;
+/* MOBILE TWEAKS */
+@media(max-width:480px){
+
+  .container{
+    padding:10px;
+  }
+
+  .card{
+    padding:12px;
+  }
+
+  .gallery-item img{
+    height:90px;
+  }
 }
 
-@keyframes fall{
-  from{transform:translateY(-10vh)}
-  to{transform:translateY(110vh)}
-}
 </style>
 </head>
 
-<body oncontextmenu="return false">
+<body>
 
 <!-- VIDEO -->
 <video autoplay muted loop playsinline>
@@ -213,12 +197,12 @@ h1{
 </div>
 
 <div class="card">
-  With blessings of our families, we invite you to celebrate our engagement.
+With blessings of our families, we invite you to celebrate our engagement.
 </div>
 
 <div class="card">
-  📍 Thotapally <br>
-  🗓 April 15, 2026 • 11:00 AM
+📍 Thotapally <br>
+🗓 April 15, 2026 • 11:00 AM
 </div>
 
 <!-- MAIN IMAGE -->
@@ -230,36 +214,31 @@ h1{
 <!-- GALLERY -->
 <div class="gallery">
   <h2>Our Moments ✨</h2>
+
   <div class="gallery-grid">
 
     <div class="gallery-item">
-      <img src="g1.jpg">
-      <button class="view-btn" onclick="openImage('g1.jpg')">View</button>
+      <img src="g1.jpg" onclick="openImage('g1.jpg')">
     </div>
 
     <div class="gallery-item">
-      <img src="g2.jpg">
-      <button class="view-btn" onclick="openImage('g2.jpg')">View</button>
+      <img src="g2.jpg" onclick="openImage('g2.jpg')">
     </div>
 
     <div class="gallery-item">
-      <img src="g3.jpg">
-      <button class="view-btn" onclick="openImage('g3.jpg')">View</button>
+      <img src="g3.jpg" onclick="openImage('g3.jpg')">
     </div>
 
     <div class="gallery-item">
-      <img src="g4.jpg">
-      <button class="view-btn" onclick="openImage('g4.jpg')">View</button>
+      <img src="g4.jpg" onclick="openImage('g4.jpg')">
     </div>
 
     <div class="gallery-item">
-      <img src="g5.jpg">
-      <button class="view-btn" onclick="openImage('g5.jpg')">View</button>
+      <img src="g5.jpg" onclick="openImage('g5.jpg')">
     </div>
 
     <div class="gallery-item">
-      <img src="g6.jpg">
-      <button class="view-btn" onclick="openImage('g6.jpg')">View</button>
+      <img src="g6.jpg" onclick="openImage('g6.jpg')">
     </div>
 
   </div>
@@ -268,26 +247,13 @@ h1{
 </div>
 
 <!-- POPUP -->
-<div id="popup">
+<div id="popup" onclick="closePopup()">
   <img id="popup-img">
 </div>
 
 <script>
 
-// 🔒 PROTECTION
-document.addEventListener("contextmenu", e => e.preventDefault());
-document.addEventListener("copy", e => e.preventDefault());
-document.addEventListener("cut", e => e.preventDefault());
-document.addEventListener("paste", e => e.preventDefault());
-
-document.addEventListener("keydown", e=>{
-  if(e.ctrlKey && ["u","s","c","v"].includes(e.key.toLowerCase())){
-    e.preventDefault();
-  }
-  if(e.key === "F12") e.preventDefault();
-});
-
-// 🎵 MUSIC
+// MUSIC
 let started=false;
 function startMusic(){
   if(started) return;
@@ -296,23 +262,14 @@ function startMusic(){
 }
 document.addEventListener("click", startMusic, { once:true });
 
-// 🖼 IMAGE VIEW
+// IMAGE VIEW
 function openImage(src){
   document.getElementById("popup").style.display="flex";
   document.getElementById("popup-img").src=src;
 }
 
-document.getElementById("popup").onclick=()=>{
+function closePopup(){
   document.getElementById("popup").style.display="none";
-};
-
-// ✨ SPARKLES
-for(let i=0;i<30;i++){
-  const s=document.createElement("div");
-  s.className="sparkle";
-  s.style.left=Math.random()*100+"vw";
-  s.style.animationDuration=(Math.random()*3+2)+"s";
-  document.body.appendChild(s);
 }
 
 </script>
