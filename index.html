@@ -20,26 +20,15 @@ body{
   font-family:'Montserrat',sans-serif;
   background:#000;
   color:#fff;
+  overflow-x:hidden;
 }
 
-/* LOCK SCREEN */
-#lock-screen{
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:black;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
+/* BLOCK IMAGE DRAG */
+img{
+  -webkit-user-drag:none;
 }
 
-.lock-box input, .lock-box button{
-  padding:10px;
-  margin-top:10px;
-}
-
-/* VIDEO BG */
+/* VIDEO */
 video{
   position:fixed;
   width:100%;
@@ -61,74 +50,110 @@ video{
   display:flex;
   flex-direction:column;
   align-items:center;
+  justify-content:center;
   text-align:center;
   padding:20px;
 }
 
+/* TITLE */
 h1{
   font-family:'Great Vibes',cursive;
-  font-size:3rem;
-  margin-top:60px;
+  font-size:3.5rem;
   background:linear-gradient(45deg,#ff7eb3,#65d6ff);
   -webkit-background-clip:text;
   color:transparent;
 }
 
-/* SLIDESHOW */
-.slideshow{
-  width:90%;
+.subtitle{
+  margin-top:10px;
+  opacity:.9;
+}
+
+/* CARD */
+.card{
+  margin-top:20px;
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(10px);
+  padding:20px;
+  border-radius:15px;
   max-width:600px;
-  height:300px;
-  position:relative;
-  overflow:hidden;
+}
+
+/* BUTTON */
+.map-btn{
+  margin-top:10px;
+  display:inline-block;
+  padding:10px 15px;
+  border-radius:30px;
+  background:linear-gradient(45deg,#ff7eb3,#65d6ff,#ffd86f);
+  color:#000;
+  text-decoration:none;
+  font-weight:600;
+}
+
+/* PHOTO */
+.couple-photo img{
+  width:550px;
+  max-width:95%;
+  margin-top:20px;
   border-radius:20px;
-  margin-top:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.6);
 }
 
-.slide{
-  position:absolute;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  opacity:0;
-  transition:1s;
+/* GALLERY */
+.gallery{
+  margin-top:40px;
 }
 
-.slide.active{
-  opacity:1;
+.gallery h2{
+  font-family:'Great Vibes',cursive;
+  font-size:2.5rem;
+  margin-bottom:15px;
 }
 
-/* SWIPE GALLERY */
-.swipe-gallery{
-  display:flex;
-  overflow-x:auto;
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
   gap:10px;
-  margin-top:20px;
+  max-width:800px;
 }
 
-.swipe-gallery img{
-  width:250px;
-  height:180px;
+.gallery-grid img{
+  width:100%;
+  height:140px;
   object-fit:cover;
   border-radius:10px;
+  cursor:pointer;
 }
 
-/* VIDEO */
-.video-section video{
-  width:90%;
-  max-width:500px;
-  margin:10px 0;
+/* POPUP */
+#popup{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:black;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+#popup img{
+  max-width:90%;
+  max-height:90%;
   border-radius:15px;
 }
 
-/* MUSIC BTN */
+/* MUSIC BUTTON */
 .music{
   position:fixed;
   bottom:20px;
   right:20px;
   background:#fff;
   color:#000;
-  padding:10px;
+  padding:10px 15px;
   border-radius:20px;
   cursor:pointer;
 }
@@ -152,98 +177,102 @@ h1{
 
 <body oncontextmenu="return false">
 
-<!-- LOCK -->
-<div id="lock-screen">
-  <div class="lock-box">
-    <h2>Private Invitation 🔐</h2>
-    <input type="password" id="pass" placeholder="Enter Password">
-    <button onclick="unlock()">Enter</button>
-  </div>
-</div>
-
-<!-- BG -->
-<video autoplay muted loop>
-  <source src="your-video.mp4">
+<!-- VIDEO -->
+<video autoplay muted loop playsinline>
+  <source src="your-video.mp4" type="video/mp4">
 </video>
 <div class="overlay"></div>
 
 <!-- MUSIC -->
 <audio id="bgm" loop>
-  <source src="music.mp3">
+  <source src="music.mp3" type="audio/mpeg">
 </audio>
-<div class="music" onclick="startMusic()">🔊</div>
+<div class="music" onclick="startMusic()">🔊 Tap</div>
 
 <div class="container">
 
 <h1>Sowmya & Venu</h1>
 
-<!-- SLIDESHOW -->
-<div class="slideshow">
-  <img src="g1.jpg" class="slide active">
-  <img src="g2.jpg" class="slide">
-  <img src="g3.jpg" class="slide">
+<div class="subtitle">
+💍 With joyful hearts, we invite you 💍
 </div>
 
-<!-- SWIPE GALLERY -->
-<div class="swipe-gallery">
-  <img src="g1.jpg">
-  <img src="g2.jpg">
-  <img src="g3.jpg">
-  <img src="g4.jpg">
+<div class="card">
+  With blessings of our families, we invite you to celebrate our engagement.
 </div>
 
-<!-- VIDEO -->
-<div class="video-section">
-  <h2>Our Video Moments 🎬</h2>
-  <video controls>
-    <source src="v1.mp4">
-  </video>
-  <video controls>
-    <source src="v2.mp4">
-  </video>
+<div class="card">
+  📍 Thotapally <br>
+  🗓 April 15, 2026 • 11:00 AM
 </div>
 
+<div class="couple-photo">
+  <img src="photo1.jpg">
+</div>
+
+<!-- GALLERY -->
+<div class="gallery">
+  <h2>Our Moments ✨</h2>
+  <div class="gallery-grid">
+    <img src="g1.jpg">
+    <img src="g2.jpg">
+    <img src="g3.jpg">
+    <img src="g4.jpg">
+    <img src="g5.jpg">
+    <img src="g6.jpg">
+  </div>
+</div>
+
+</div>
+
+<!-- POPUP -->
+<div id="popup">
+  <img id="popup-img">
 </div>
 
 <script>
 
-// PASSWORD
-function unlock(){
-  if(document.getElementById("pass").value === "SowmyaVenu@2026"){
-    document.getElementById("lock-screen").style.display="none";
-  }else{
-    alert("Wrong password");
-  }
-}
-
-// BLOCK ACTIONS
+// 🔒 PROTECTION
 document.addEventListener("contextmenu", e => e.preventDefault());
 document.addEventListener("copy", e => e.preventDefault());
+document.addEventListener("cut", e => e.preventDefault());
+document.addEventListener("paste", e => e.preventDefault());
+
 document.addEventListener("keydown", e=>{
-  if(e.ctrlKey) e.preventDefault();
+  if(e.ctrlKey && ["u","s","c","v"].includes(e.key.toLowerCase())){
+    e.preventDefault();
+  }
   if(e.key === "F12") e.preventDefault();
 });
 
-// MUSIC
+// 🎵 MUSIC
 let started=false;
 function startMusic(){
   if(started) return;
   started=true;
   document.getElementById("bgm").play();
 }
+document.addEventListener("click", startMusic, { once:true });
 
-// SLIDESHOW
-let slides=document.querySelectorAll(".slide");
-let i=0;
-setInterval(()=>{
-  slides[i].classList.remove("active");
-  i=(i+1)%slides.length;
-  slides[i].classList.add("active");
-},3000);
+// 🖼 POPUP VIEW
+const images = document.querySelectorAll(".gallery-grid img");
+const popup = document.getElementById("popup");
+const popupImg = document.getElementById("popup-img");
 
-// SPARKLES
+images.forEach(img=>{
+  img.addEventListener("click", ()=>{
+    popup.style.display="flex";
+    popupImg.src = img.src;
+  });
+});
+
+popup.addEventListener("click", ()=>{
+  popup.style.display="none";
+});
+
+// ✨ SPARKLES
 for(let i=0;i<30;i++){
-  let s=document.createElement("div");
+  const s=document.createElement("div");
   s.className="sparkle";
   s.style.left=Math.random()*100+"vw";
   s.style.animationDuration=(Math.random()*3+2)+"s";
