@@ -19,7 +19,6 @@ body{
   font-family:'Montserrat',sans-serif;
   background:#000;
   color:#fff;
-  overflow-x:hidden;
 }
 
 /* VIDEO */
@@ -41,19 +40,14 @@ video{
 
 /* CONTAINER */
 .container{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
   padding:15px;
+  text-align:center;
 }
 
 /* TITLE */
 h1{
   font-family:'Great Vibes',cursive;
-  font-size:clamp(2rem, 6vw, 3.5rem);
+  font-size:2.5rem;
   background:linear-gradient(45deg,#ff7eb3,#65d6ff);
   -webkit-background-clip:text;
   color:transparent;
@@ -61,65 +55,62 @@ h1{
 
 .subtitle{
   margin-top:8px;
-  font-size:clamp(14px,3vw,18px);
+  font-size:14px;
 }
 
 /* CARD */
 .card{
   margin-top:15px;
   background:rgba(255,255,255,0.1);
-  backdrop-filter:blur(10px);
-  padding:15px;
+  padding:12px;
   border-radius:12px;
-  width:100%;
-  max-width:500px;
-  font-size:clamp(13px,3vw,16px);
 }
 
-/* IMAGE */
+/* MAIN IMAGE */
 .photo-box img{
   width:100%;
-  max-width:500px;
-  margin-top:20px;
   border-radius:15px;
-}
-
-/* BUTTON */
-.view-btn{
-  margin-top:10px;
-  padding:8px 14px;
-  border:none;
-  border-radius:20px;
-  background:linear-gradient(45deg,#ff7eb3,#65d6ff);
-  color:#000;
-  font-size:13px;
-  font-weight:600;
-  cursor:pointer;
+  margin-top:20px;
 }
 
 /* GALLERY */
 .gallery{
   margin-top:30px;
-  width:100%;
 }
 
 .gallery h2{
   font-family:'Great Vibes',cursive;
-  font-size:clamp(1.8rem,5vw,2.5rem);
   margin-bottom:15px;
 }
 
-.gallery-grid{
+/* ROW STYLES */
+.row{
+  margin-bottom:10px;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
   gap:8px;
 }
 
-.gallery-item img{
+.row img{
   width:100%;
-  height:110px;
+  height:120px;
   object-fit:cover;
   border-radius:10px;
+  cursor:pointer;
+}
+
+/* 1 IMAGE */
+.row-1{
+  grid-template-columns:1fr;
+}
+
+/* 2 IMAGES */
+.row-2{
+  grid-template-columns:1fr 1fr;
+}
+
+/* 3 IMAGES */
+.row-3{
+  grid-template-columns:1fr 1fr 1fr;
 }
 
 /* POPUP */
@@ -142,7 +133,7 @@ h1{
   border-radius:10px;
 }
 
-/* MUSIC BUTTON */
+/* MUSIC */
 .music{
   position:fixed;
   bottom:15px;
@@ -153,22 +144,6 @@ h1{
   border-radius:20px;
   font-size:12px;
   cursor:pointer;
-}
-
-/* MOBILE TWEAKS */
-@media(max-width:480px){
-
-  .container{
-    padding:10px;
-  }
-
-  .card{
-    padding:12px;
-  }
-
-  .gallery-item img{
-    height:90px;
-  }
 }
 
 </style>
@@ -207,41 +182,41 @@ With blessings of our families, we invite you to celebrate our engagement.
 
 <!-- MAIN IMAGE -->
 <div class="photo-box">
-  <img src="photo1.jpg">
-  <button class="view-btn" onclick="openImage('photo1.jpg')">View</button>
+  <img src="photo1.jpg" onclick="openImage('photo1.jpg')">
 </div>
 
 <!-- GALLERY -->
 <div class="gallery">
-  <h2>Our Moments ✨</h2>
+<h2>Our Moments ✨</h2>
 
-  <div class="gallery-grid">
+<!-- 1 IMAGE -->
+<div class="row row-1">
+  <img src="g1.jpg" onclick="openImage('g1.jpg')">
+</div>
 
-    <div class="gallery-item">
-      <img src="g1.jpg" onclick="openImage('g1.jpg')">
-    </div>
+<!-- 2 IMAGES -->
+<div class="row row-2">
+  <img src="g2.jpg" onclick="openImage('g2.jpg')">
+  <img src="g3.jpg" onclick="openImage('g3.jpg')">
+</div>
 
-    <div class="gallery-item">
-      <img src="g2.jpg" onclick="openImage('g2.jpg')">
-    </div>
+<!-- 3 IMAGES -->
+<div class="row row-3">
+  <img src="g4.jpg" onclick="openImage('g4.jpg')">
+  <img src="g5.jpg" onclick="openImage('g5.jpg')">
+  <img src="g6.jpg" onclick="openImage('g6.jpg')">
+</div>
 
-    <div class="gallery-item">
-      <img src="g3.jpg" onclick="openImage('g3.jpg')">
-    </div>
+<!-- REPEAT PATTERN AGAIN -->
+<div class="row row-1">
+  <img src="g7.jpg" onclick="openImage('g7.jpg')">
+</div>
 
-    <div class="gallery-item">
-      <img src="g4.jpg" onclick="openImage('g4.jpg')">
-    </div>
+<div class="row row-2">
+  <img src="g8.jpg" onclick="openImage('g8.jpg')">
+  <img src="g9.jpg" onclick="openImage('g9.jpg')">
+</div>
 
-    <div class="gallery-item">
-      <img src="g5.jpg" onclick="openImage('g5.jpg')">
-    </div>
-
-    <div class="gallery-item">
-      <img src="g6.jpg" onclick="openImage('g6.jpg')">
-    </div>
-
-  </div>
 </div>
 
 </div>
