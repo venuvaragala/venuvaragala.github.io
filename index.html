@@ -26,6 +26,7 @@ body{
 /* BLOCK IMAGE DRAG */
 img{
   -webkit-user-drag:none;
+  pointer-events:none;
 }
 
 /* VIDEO */
@@ -79,20 +80,14 @@ h1{
   max-width:600px;
 }
 
-/* BUTTON */
-.map-btn{
-  margin-top:10px;
+/* PHOTO WRAPPER */
+.photo-box{
+  position:relative;
   display:inline-block;
-  padding:10px 15px;
-  border-radius:30px;
-  background:linear-gradient(45deg,#ff7eb3,#65d6ff,#ffd86f);
-  color:#000;
-  text-decoration:none;
-  font-weight:600;
 }
 
-/* PHOTO */
-.couple-photo img{
+/* IMAGE STYLE */
+.photo-box img{
   width:550px;
   max-width:95%;
   margin-top:20px;
@@ -100,7 +95,7 @@ h1{
   box-shadow:0 10px 30px rgba(0,0,0,0.6);
 }
 
-/* GALLERY */
+/* GALLERY GRID */
 .gallery{
   margin-top:40px;
 }
@@ -118,12 +113,32 @@ h1{
   max-width:800px;
 }
 
-.gallery-grid img{
+.gallery-item{
+  position:relative;
+}
+
+.gallery-item img{
   width:100%;
   height:140px;
   object-fit:cover;
   border-radius:10px;
+}
+
+/* VIEW BUTTON */
+.view-btn{
+  position:absolute;
+  bottom:10px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:6px 12px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(45deg,#ff7eb3,#65d6ff);
+  color:#000;
+  font-size:12px;
+  font-weight:600;
   cursor:pointer;
+  pointer-events:auto;
 }
 
 /* POPUP */
@@ -206,20 +221,47 @@ h1{
   🗓 April 15, 2026 • 11:00 AM
 </div>
 
-<div class="couple-photo">
+<!-- MAIN IMAGE -->
+<div class="photo-box">
   <img src="photo1.jpg">
+  <button class="view-btn" onclick="openImage('photo1.jpg')">View</button>
 </div>
 
 <!-- GALLERY -->
 <div class="gallery">
   <h2>Our Moments ✨</h2>
   <div class="gallery-grid">
-    <img src="g1.jpg">
-    <img src="g2.jpg">
-    <img src="g3.jpg">
-    <img src="g4.jpg">
-    <img src="g5.jpg">
-    <img src="g6.jpg">
+
+    <div class="gallery-item">
+      <img src="g1.jpg">
+      <button class="view-btn" onclick="openImage('g1.jpg')">View</button>
+    </div>
+
+    <div class="gallery-item">
+      <img src="g2.jpg">
+      <button class="view-btn" onclick="openImage('g2.jpg')">View</button>
+    </div>
+
+    <div class="gallery-item">
+      <img src="g3.jpg">
+      <button class="view-btn" onclick="openImage('g3.jpg')">View</button>
+    </div>
+
+    <div class="gallery-item">
+      <img src="g4.jpg">
+      <button class="view-btn" onclick="openImage('g4.jpg')">View</button>
+    </div>
+
+    <div class="gallery-item">
+      <img src="g5.jpg">
+      <button class="view-btn" onclick="openImage('g5.jpg')">View</button>
+    </div>
+
+    <div class="gallery-item">
+      <img src="g6.jpg">
+      <button class="view-btn" onclick="openImage('g6.jpg')">View</button>
+    </div>
+
   </div>
 </div>
 
@@ -254,21 +296,15 @@ function startMusic(){
 }
 document.addEventListener("click", startMusic, { once:true });
 
-// 🖼 POPUP VIEW
-const images = document.querySelectorAll(".gallery-grid img");
-const popup = document.getElementById("popup");
-const popupImg = document.getElementById("popup-img");
+// 🖼 IMAGE VIEW
+function openImage(src){
+  document.getElementById("popup").style.display="flex";
+  document.getElementById("popup-img").src=src;
+}
 
-images.forEach(img=>{
-  img.addEventListener("click", ()=>{
-    popup.style.display="flex";
-    popupImg.src = img.src;
-  });
-});
-
-popup.addEventListener("click", ()=>{
-  popup.style.display="none";
-});
+document.getElementById("popup").onclick=()=>{
+  document.getElementById("popup").style.display="none";
+};
 
 // ✨ SPARKLES
 for(let i=0;i<30;i++){
