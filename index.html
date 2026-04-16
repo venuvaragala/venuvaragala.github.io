@@ -6,12 +6,6 @@
 
 <title>Sowmya & Venu Engagement</title>
 
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://venuvaragala.github.io/invitation/">
-<meta property="og:title" content="Sowmya & Venu Engagement">
-<meta property="og:description" content="April 15, 2026 • 11:00 AM • Thotapally">
-<meta property="og:image" content="https://venuvaragala.github.io/preview.jpg">
-
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
@@ -20,24 +14,32 @@
   padding:0;
   box-sizing:border-box;
   user-select:none;
-  -webkit-user-select:none;
-  -ms-user-select:none;
 }
 
 body{
   font-family:'Montserrat',sans-serif;
   background:#000;
   color:#fff;
-  overflow-x:hidden;
 }
 
-/* BLOCK IMAGE DRAG */
-img{
-  pointer-events:none;
-  -webkit-user-drag:none;
+/* LOCK SCREEN */
+#lock-screen{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:black;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
 }
 
-/* VIDEO */
+.lock-box input, .lock-box button{
+  padding:10px;
+  margin-top:10px;
+}
+
+/* VIDEO BG */
 video{
   position:fixed;
   width:100%;
@@ -59,63 +61,76 @@ video{
   display:flex;
   flex-direction:column;
   align-items:center;
-  justify-content:center;
   text-align:center;
   padding:20px;
 }
 
 h1{
   font-family:'Great Vibes',cursive;
-  font-size:3.5rem;
+  font-size:3rem;
+  margin-top:60px;
   background:linear-gradient(45deg,#ff7eb3,#65d6ff);
   -webkit-background-clip:text;
   color:transparent;
 }
 
-.subtitle{
-  margin-top:10px;
-  opacity:.9;
-}
-
-.card{
-  margin-top:20px;
-  background:rgba(255,255,255,0.1);
-  backdrop-filter:blur(10px);
-  padding:20px;
-  border-radius:15px;
+/* SLIDESHOW */
+.slideshow{
+  width:90%;
   max-width:600px;
-}
-
-.map-btn{
-  margin-top:10px;
-  display:inline-block;
-  padding:10px 15px;
-  border-radius:30px;
-  background:linear-gradient(45deg,#ff7eb3,#65d6ff,#ffd86f);
-  color:#000;
-  text-decoration:none;
-  font-weight:600;
-}
-
-.couple-photo img{
-  width:550px;
-  max-width:95%;
-  margin-top:20px;
+  height:300px;
+  position:relative;
+  overflow:hidden;
   border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.6);
+  margin-top:20px;
 }
 
+.slide{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition:1s;
+}
+
+.slide.active{
+  opacity:1;
+}
+
+/* SWIPE GALLERY */
+.swipe-gallery{
+  display:flex;
+  overflow-x:auto;
+  gap:10px;
+  margin-top:20px;
+}
+
+.swipe-gallery img{
+  width:250px;
+  height:180px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+/* VIDEO */
+.video-section video{
+  width:90%;
+  max-width:500px;
+  margin:10px 0;
+  border-radius:15px;
+}
+
+/* MUSIC BTN */
 .music{
   position:fixed;
   bottom:20px;
   right:20px;
   background:#fff;
   color:#000;
-  padding:10px 15px;
+  padding:10px;
   border-radius:20px;
   cursor:pointer;
-  font-weight:600;
-  z-index:10;
 }
 
 /* SPARKLES */
@@ -126,7 +141,6 @@ h1{
   background:white;
   border-radius:50%;
   animation:fall linear infinite;
-  opacity:0.7;
 }
 
 @keyframes fall{
@@ -138,115 +152,98 @@ h1{
 
 <body oncontextmenu="return false">
 
-<video autoplay muted loop playsinline>
-  <source src="your-video.mp4" type="video/mp4">
+<!-- LOCK -->
+<div id="lock-screen">
+  <div class="lock-box">
+    <h2>Private Invitation 🔐</h2>
+    <input type="password" id="pass" placeholder="Enter Password">
+    <button onclick="unlock()">Enter</button>
+  </div>
+</div>
+
+<!-- BG -->
+<video autoplay muted loop>
+  <source src="your-video.mp4">
 </video>
 <div class="overlay"></div>
 
+<!-- MUSIC -->
 <audio id="bgm" loop>
-  <source src="music.mp3" type="audio/mpeg">
+  <source src="music.mp3">
 </audio>
-
-<div class="music" onclick="startMusic()">🔊 Tap to Play</div>
+<div class="music" onclick="startMusic()">🔊</div>
 
 <div class="container">
 
 <h1>Sowmya & Venu</h1>
 
-<div class="subtitle">
-💍 With joyful hearts, we invite you 💍
+<!-- SLIDESHOW -->
+<div class="slideshow">
+  <img src="g1.jpg" class="slide active">
+  <img src="g2.jpg" class="slide">
+  <img src="g3.jpg" class="slide">
 </div>
 
-<div class="card">
-  <p style="line-height:1.6;">
-    With blessings of our families and divine grace,  
-    we invite you to celebrate our engagement ceremony.
-  </p>
+<!-- SWIPE GALLERY -->
+<div class="swipe-gallery">
+  <img src="g1.jpg">
+  <img src="g2.jpg">
+  <img src="g3.jpg">
+  <img src="g4.jpg">
 </div>
 
-<div class="card">
-  <p><strong>📍 Venue:</strong> Thotapally</p>
-  <p><strong>🗓 Date:</strong> April 15, 2026 • 11:00 AM</p>
-
-  <a class="map-btn" href="https://maps.app.goo.gl/2smbzygt1yn5xWY19" target="_blank">
-    📍 Open Location
-  </a>
-</div>
-
-<div class="couple-photo">
-  <img src="photo1.jpg" alt="Couple">
+<!-- VIDEO -->
+<div class="video-section">
+  <h2>Our Video Moments 🎬</h2>
+  <video controls>
+    <source src="v1.mp4">
+  </video>
+  <video controls>
+    <source src="v2.mp4">
+  </video>
 </div>
 
 </div>
 
 <script>
 
-// BLOCK COPY EVENTS (CORE SECURITY LAYER)
-document.addEventListener("contextmenu", e => e.preventDefault());
-document.addEventListener("copy", e => e.preventDefault());
-document.addEventListener("cut", e => e.preventDefault());
-document.addEventListener("paste", e => e.preventDefault());
-
-// BLOCK KEYBOARD SHORTCUTS
-document.addEventListener("keydown", function(e){
-  if(
-    e.ctrlKey && 
-    ["u","s","c","v"].includes(e.key.toLowerCase())
-  ){
-    e.preventDefault();
-  }
-
-  if(e.key === "F12"){
-    e.preventDefault();
-  }
-});
-
-// MUSIC
-let started = false;
-
-function startMusic(){
-  if(started) return;
-  started = true;
-
-  const music = document.getElementById("bgm");
-  music.volume = 0;
-
-  const playPromise = music.play();
-
-  if(playPromise){
-    playPromise.then(()=>{
-      let v = 0;
-      const fade = setInterval(()=>{
-        v += 0.05;
-        music.volume = Math.min(v,1);
-        if(v >= 1) clearInterval(fade);
-      },200);
-    }).catch(()=>{});
+// PASSWORD
+function unlock(){
+  if(document.getElementById("pass").value === "venu123"){
+    document.getElementById("lock-screen").style.display="none";
+  }else{
+    alert("Wrong password");
   }
 }
 
-document.addEventListener("click", startMusic, { once:true });
+// BLOCK ACTIONS
+document.addEventListener("contextmenu", e => e.preventDefault());
+document.addEventListener("copy", e => e.preventDefault());
+document.addEventListener("keydown", e=>{
+  if(e.ctrlKey) e.preventDefault();
+  if(e.key === "F12") e.preventDefault();
+});
 
-// COUNTDOWN
-const eventDate = new Date("April 15, 2026 11:00:00").getTime();
+// MUSIC
+let started=false;
+function startMusic(){
+  if(started) return;
+  started=true;
+  document.getElementById("bgm").play();
+}
 
+// SLIDESHOW
+let slides=document.querySelectorAll(".slide");
+let i=0;
 setInterval(()=>{
-  const now = new Date().getTime();
-  const gap = eventDate - now;
-
-  const d = Math.floor(gap/(1000*60*60*24));
-  const h = Math.floor((gap%(1000*60*60*24))/(1000*60*60));
-  const m = Math.floor((gap%(1000*60*60))/(1000*60));
-  const s = Math.floor((gap%(1000*60))/1000);
-
-  document.querySelector(".subtitle").innerText =
-    `💍 ${d}d ${h}h ${m}m ${s}s left for the big moment 💍`;
-
-},1000);
+  slides[i].classList.remove("active");
+  i=(i+1)%slides.length;
+  slides[i].classList.add("active");
+},3000);
 
 // SPARKLES
-for(let i=0;i<35;i++){
-  const s=document.createElement("div");
+for(let i=0;i<30;i++){
+  let s=document.createElement("div");
   s.className="sparkle";
   s.style.left=Math.random()*100+"vw";
   s.style.animationDuration=(Math.random()*3+2)+"s";
